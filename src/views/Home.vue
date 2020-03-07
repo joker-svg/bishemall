@@ -1,12 +1,13 @@
 <template>
   <div class="home">
+    <RightMenu style="float: right"></RightMenu>
     <div class="header-image">
       <img alt="Vue logo" src="../assets/head.png">
     </div>
     <Top></Top>
     <Search></Search>
-    <Lunbo></Lunbo>
-
+    <Lunbo style="float: left"></Lunbo>
+    <Lunbo style="float: left"></Lunbo>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import Top from '@/components/index/Top.vue'
 import Search from '@/components/index/Search.vue'
 import Lunbo from '@/components/index/Lunbo.vue'
+import RightMenu from "../components/index/RightMenu";
 
 export default {
   name: 'Home',
@@ -23,7 +25,8 @@ export default {
     HelloWorld,
     Top,
     Search,
-    Lunbo
+    Lunbo,
+    RightMenu
   }
 }
 </script>

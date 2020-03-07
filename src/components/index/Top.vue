@@ -10,7 +10,7 @@
                 <li v-for="item in login"><router-link to="/">{{item}}</router-link><span>|</span></li>
                 <li class="gouWuChe">
                     <a class="gouwu">
-                        <i class="el-icon-shopping-cart-2" style="width: 20px;height: 20px"></i>
+                        <i class="el-icon-shopping-cart-2" style="width: 20px;height: 20px;font-weight: bold"></i>
                         购物车
                         <span class="gouwu">(0)</span>
                     </a>

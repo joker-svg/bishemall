@@ -18,34 +18,18 @@
         <!--盒子-->
         <div class="box1" :class="{active:isTrue[index].hide}" v-for="(item , index) in 9"
              @mouseover="boxshow(index)" @mouseout="boxhide(index)">
-            {{item}}
+            <div class="box1-left">
+                <ul>
+                    <li v-for="(item,index) in content">
+                        <img v-bind:src="item.psrc" alt="">
+                        <p>{{item.name}}</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="box1-right">
+
+            </div>
         </div>
-<!--        <div class="box1" :class="{active:isTrue[1].hide}">-->
-<!--            2-->
-<!--        </div>-->
-<!--        <div class="box1" :class="{active:isTrue[2].hide}">-->
-<!--            3-->
-<!--        </div>-->
-<!--        <div class="box1" :class="{active:isTrue[3].hide}">-->
-<!--            4-->
-<!--        </div>-->
-<!--        <div class="box1" :class="{active:isTrue[4].hide}">-->
-<!--            5-->
-<!--        </div>-->
-<!--        <div class="box1" :class="{active:isTrue[5].hide}">-->
-<!--            6-->
-<!--        </div>-->
-<!--        <div class="box1" :class="{active:isTrue[6].hide}">-->
-<!--            7-->
-<!--        </div>-->
-<!--        <div class="box1" :class="{active:isTrue[7].hide}">-->
-<!--            8-->
-<!--        </div>-->
-<!--        <div class="box1" :class="{active:isTrue[8].hide}">-->
-<!--            9-->
-<!--        </div>-->
-
-
     </div>
 </template>
 
@@ -65,7 +49,19 @@
                     {id:3,idname:"家电 插线板"}, {id:4,idname:"智能 路由器"},{id:5,idname:"显示器 配件"},
                     {id:6,idname:"耳机 音箱"},{id:7,idname:"出行 穿戴"},{id:8,idname:"生活 箱包"}],
                 isTrue:[{hide:false},{hide:false},{hide:false},{hide:false},{hide:false},{hide:false},
-                    {hide:false},{hide:false},{hide:false}]
+                    {hide:false},{hide:false},{hide:false}],
+                content:[{id:0,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:1,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:2,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:3,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:4,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:5,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:0,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:1,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:2,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:3,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:4,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")},
+                    {id:5,kinds:"手机 电话卡",name:"Readmi Note8",psrc:require("../../assets/img/b.jpg")}]
             }
         },
         methods:{
@@ -73,12 +69,6 @@
                 this.isTrue[index].hide=!this.isTrue[index].hide;
             },
             boxhide:function (index) {
-                this.isTrue[index].hide=!this.isTrue[index].hide;
-            },
-            bshow:function (index) {
-                this.isTrue[index].hide=!this.isTrue[index].hide;
-            },
-            bhide:function (index) {
                 this.isTrue[index].hide=!this.isTrue[index].hide;
             }
         }
@@ -153,10 +143,52 @@
         position: absolute;
         z-index: 99;
         background-color: white;
-        box-shadow: 4px 0px 2px rgba(0,0,0,0.4);
+        box-shadow: 4px 6px 6px rgba(0,0,0,0.4);
+        border-top: 0.5px solid #ececec;
+        //box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
         display: none;
         cursor: pointer;
-        //opacity: 0.9;
+
+        a{
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        a:hover{
+            color: @theme-color;
+        }
+
+        .box1-left{
+            float: left;
+            //border: 0.5px solid;
+            width: 720px;
+            height: 360px;
+            margin-top: 25px;
+            margin-left: 20px;
+            li{
+                list-style: none;
+                float: left;
+                width: 220px;
+                height: 100px;
+                img{
+                    float: left;
+                }
+            }
+            p{
+                line-height: 50px;
+                margin-left: 10px;
+                float: left;
+                color: #616161;
+                font-size: 14px;
+            }
+        }
+        .box1-right{
+            float: left;
+            border: 0.5px solid;
+            width: 200px;
+            height: 360px;
+            margin-top: 25px;
+        }
     }
 
     .active{
