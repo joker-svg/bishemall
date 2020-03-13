@@ -51,6 +51,7 @@
             boxshow:function (index) {
                 this.isTrue[index].hide=!this.isTrue[index].hide;
                 this.show2=!this.show2;
+                //New.$emit()
             },
             boxhide:function (index) {
                 this.isTrue[index].hide=!this.isTrue[index].hide;

@@ -1,23 +1,37 @@
 <template>
-  <div class="home">
+  <div class="home" id="top">
+    <!--右侧侧边栏-->
     <RightMenu style="float: right"></RightMenu>
+    <!--顶部图片-->
     <div class="header-image">
       <img alt="Vue logo" src="../assets/head.png">
     </div>
+    <!--顶部菜单栏-->
     <Top></Top>
+    <!--搜索-->
     <Search></Search>
-    <Lunbo style="float: left"></Lunbo>
-    <Lunbo style="float: left"></Lunbo>
+    <!--轮播图-->
+    <Lunbo></Lunbo>
+    <!--特点链接-->
+    <Lianjie></Lianjie>
+
+    <Introduction></Introduction>
+
+    <!--底部-->
+    <Bottom></Bottom>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import Top from '@/components/index/Top.vue'
-import Search from '@/components/index/Search.vue'
-import Lunbo from '@/components/index/Lunbo.vue'
+import HelloWorld from '@/components/HelloWorld.vue';
+import Top from '@/components/index/Top.vue';
+import Search from '@/components/index/Search.vue';
+import Lunbo from '@/components/index/Lunbo.vue';
 import RightMenu from "../components/index/RightMenu";
+import Lianjie from "../components/index/Lianjie";
+import Bottom from "../components/Bottom";
+import Introduction from "../components/index/Introduction";
 
 export default {
   name: 'Home',
@@ -26,7 +40,10 @@ export default {
     Top,
     Search,
     Lunbo,
-    RightMenu
+    RightMenu,
+    Lianjie,
+    Bottom,
+    Introduction,
   }
 }
 </script>

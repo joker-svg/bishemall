@@ -7,7 +7,10 @@
         </div>
         <div>
             <ul class="top-ul1">
-                <li v-for="item in login"><router-link to="/">{{item}}</router-link><span>|</span></li>
+                <li><a style="cursor: pointer" @click="denglu">{{login[0]}}</a><span>|</span></li>
+                <li><router-link to="/">{{login[1]}}</router-link><span>|</span></li>
+                <li><router-link to="/">{{login[2]}}</router-link><span>|</span></li>
+                <li><router-link to="/">{{login[3]}}</router-link><span></span></li>
                 <li class="gouWuChe">
                     <a class="gouwu">
                         <i class="el-icon-shopping-cart-2" style="width: 20px;height: 20px;font-weight: bold"></i>
@@ -23,12 +26,19 @@
 </template>
 
 <script>
+    import New from '../../new';
+
     export default {
         data(){
             return{
                 menu:["电子商城","优质服务","开放平台","组队团购","资格证书","协议规则","下载app"],
                 login:["登录","注册","消息","导航"],
                 iconsrc:"../assets/logo.png"
+            }
+        },
+        methods:{
+            denglu:function () {
+                New.$emit('getisshow',true)
             }
         }
     }

@@ -28,9 +28,9 @@
                         <el-button><i class="el-icon-service el"></i></el-button>
                     </el-tooltip>
                 </div>
-                <div style="width: 40px;margin-top: 10px">
+                <div style="width: 40px;margin-top: 10px" v-show="isActive">
                     <el-tooltip class="item" effect="dark" content="返回顶部" placement="left">
-                        <el-button><i class="el-icon-arrow-up el" @click="isShowEvent"></i></el-button>
+                        <el-button><i class="el-icon-arrow-up el" @click="backTop(step)"></i></el-button>
                     </el-tooltip>
                 </div>
             </div>
@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <div class="left" v-show="isShow" @click="isShowEvent">
+        <div class="left" v-show="isShow" @click="leftShowEvent">
 
         </div>
     </div>
@@ -71,16 +71,38 @@
 </template>
 
 <script>
+
+    import New from '../../new';
+
     export default {
         data(){
             return{
                 drawer: false,
                 isShow:false,
                 right:'-290px',
-                show:[{hide:false},{hide:false},{hide:false},{hide:false}]
+                show:[{hide:false},{hide:false},{hide:false},{hide:false}],
+                isActive:false
             }
         },
+
+        created() {
+            New.$on('getisshow',data=>{
+                if(data===true)
+                {
+                    this.isShowEvent(0);
+                }
+            })
+        },
+
         methods:{
+            leftShowEvent:function () {
+                this.right = '-290px';
+                this.isShow = !this.isShow;
+                this.show[1].hide = false;
+                this.show[2].hide = false;
+                this.show[3].hide = false;
+                this.show[0].hide = false;
+            },
             isShowEvent:function (index) {
                 if(index===0)
                 {
@@ -96,6 +118,7 @@
                         {
                             this.right = '-290px';
                             this.isShow = !this.isShow;
+                            this.show[0].hide = false;
                         }
                         else{
                             this.show[1].hide = false;
@@ -119,6 +142,7 @@
                         {
                             this.right = '-290px';
                             this.isShow = !this.isShow;
+                            this.show[1].hide = false;
                         }
                         else{
                             this.show[0].hide = false;
@@ -142,6 +166,7 @@
                         {
                             this.right = '-290px';
                             this.isShow = !this.isShow;
+                            this.show[2].hide = false;
                         }
                         else{
                             this.show[0].hide = false;
@@ -165,6 +190,7 @@
                         {
                             this.right = '-290px';
                             this.isShow = !this.isShow;
+                            this.show[3].hide = false;
                         }
                         else{
                             this.show[1].hide = false;
@@ -174,10 +200,37 @@
                         }
                     }
                 }
-
-
+            },
+            backTop:function (step) {
+                //参数step表示时间间隔的幅度大小，以此来控制速度
+                //当回到页面顶部的时候需要将定时器清除
+                //获取滚动条位置
+                document.documentElement.scrollTop-=step;
+                if (document.documentElement.scrollTop>0) {
+                    var time=setTimeout(()=>this.backTop(step),15);//在指定的毫秒数后调用函数或计算表达式
+                }else {
+                    clearTimeout(time);
+                }
+            },
+            handelScroll:function () {
+                if (document.documentElement.scrollTop > 50) {
+                    this.isActive = true;
+                } else {
+                    this.isActive = false;
+                }
             }
-        }
+        },
+        props:{
+            step:{   //控制速度
+                type: Number,
+                default: 10
+            }
+        },
+
+        mounted () {
+            window.addEventListener('scroll', this.handelScroll)
+        },
+
     }
 </script>
 
@@ -222,8 +275,6 @@
             width: 290px;
             height: 100%;
             position: absolute;
-            //display: none;
-            //color: white;
         }
 
     }

@@ -84,38 +84,28 @@
 }
     .lun{
         width: 1206px;
-        //width: 78.7%;
         height: 410px;
-        //border: 0.5px solid;
         margin-left: 140px;
-        //margin-left: 9%;
         margin-top: 10px;
+        //z-index: 0;
 
         .leftbar{
             float: left;
             width: 240px;
-            //width: 20%;
             height: 410px;
-            //border: 0.5px solid;
-            //background-color: #407B9D;
             background-color: #407B9D;
-            //opacity: 0.5;
             ul{
                 margin-top: 25px;
             }
             li{
                 width: 240px;
                 height: 40px;
-                //background-color: #FF6700;
-                //border: 0.5px solid;
                 list-style: none;
                 a{
                     text-decoration: none;
                     margin-left: 30px;
                     line-height: 40px;
                     color: white;
-                    //border: 0.5px solid;
-                    //width: 150px;
                 }
             }
             li:hover{
@@ -126,11 +116,9 @@
 
         .rightlun{
             float: left;
-            //border:0.5px solid #eeeeee;
             border-bottom: 0.5px solid #d6d6d6;
             border-top: 0.5px solid #e4e4e4;
             width: 965px;
-            //width: 100%;
             height: 410px;
             background-color: #fbfbfb;
         }
@@ -160,7 +148,6 @@
 
         .box1-left{
             float: left;
-            //border: 0.5px solid;
             width: 720px;
             height: 360px;
             margin-top: 25px;
@@ -199,7 +186,6 @@
     }
 
     .el-carousel__item h3 {
-        //color: #475669;
         color: @theme-color;
         font-size: 14px;
         opacity: 0.75;
@@ -209,7 +195,6 @@
 
     .el-carousel__item:nth-child(2n) {
         background-color: #99a9bf;
-        //background-color: @theme-color;
     }
 
     .el-carousel__item:nth-child(2n+1) {
