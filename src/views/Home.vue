@@ -16,6 +16,7 @@
     <Lianjie></Lianjie>
 
     <Introduction></Introduction>
+    <Discount></Discount>
 
     <!--底部-->
     <Bottom></Bottom>
@@ -32,6 +33,7 @@ import RightMenu from "../components/index/RightMenu";
 import Lianjie from "../components/index/Lianjie";
 import Bottom from "../components/Bottom";
 import Introduction from "../components/index/Introduction";
+import Discount from "../components/index/Discount";
 
 export default {
   name: 'Home',
@@ -44,6 +46,7 @@ export default {
     Lianjie,
     Bottom,
     Introduction,
+    Discount,
   }
 }
 </script>
