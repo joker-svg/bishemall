@@ -1,35 +1,38 @@
 <template>
-    <div class="index-intro">
-        <div class="intro-title">
-            <div class="i-t"></div>
-            <p class="p1">特惠特价</p>
+    <div>
+        <div class="index-intro">
+            <div class="intro-title">
+                <div class="i-t"></div>
+                <p class="p1">特惠特价</p>
 
-            <div class="intro-s">
-                <div class="i-con i-c">
-                    <i class="el-icon-right" @click="right_scroll"></i>
-                </div>
-                <div class="i-con">
-                    <i class="el-icon-back" @click="left_scroll"></i>
+                <div class="intro-s">
+                    <div class="i-con i-c">
+                        <i class="el-icon-right" @click="right_scroll"></i>
+                    </div>
+                    <div class="i-con">
+                        <i class="el-icon-back" @click="left_scroll"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="intro-content">
-            <div class="box" :style="{left:box_left}" ref="box">
-                <div class="intro-good" v-for="(item,index) in 19"
-                     :class="{'g0':index===0,'g1':index > 0,'g2':index%3===0,'g3':index%3===1,'g4':index%3===2}">
-                    <img src="../../assets/img/intro01.jpg" alt="">
-                    <p class="intro-p1 p4">全面屏电视E55A</p>
-                    <p class="intro-p2 p4">全面屏设计，人工智能语音{{item}}</p>
-                    <p class="intro-p3">￥55.0</p>
-                    <p class="intro-p4">￥65.0</p>
-                    <div class="s-save">
-                        <i class="el-icon-star-off"></i>
-                        <p>收藏</p>
+            <div class="intro-content">
+                <div class="box" :style="{left:box_left}" ref="box">
+                    <div class="intro-good" v-for="(item,index) in 19"
+                         :class="{'g0':index===0,'g1':index > 0,'g2':index%3===0,'g3':index%3===1,'g4':index%3===2}">
+                        <img src="../../assets/img/intro02.jpg" alt="">
+                        <p class="intro-p1 p4">全面屏电视E55A</p>
+                        <p class="intro-p2 p4">全面屏设计，人工智能语音{{item}}</p>
+                        <p class="intro-p3">￥55.0</p>
+                        <p class="intro-p4">￥65.0</p>
+                        <div class="s-save">
+                            <i class="el-icon-star-off"></i>
+                            <p>收藏</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -193,7 +196,7 @@
                 width: 200px;
                 height: 200px;
                 margin-left: 11px;
-                margin-top: 2px;
+                margin-top: 5px;
             }
             .p4{
                 text-align: center;
@@ -211,7 +214,7 @@
                 color: #99a9bf;
             }
             .intro-p3{
-                color: red;
+                color: @theme-color;
                 margin-left: 21px;
                 margin-top: 25px;
                 width: 50px;

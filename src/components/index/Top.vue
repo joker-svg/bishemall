@@ -1,27 +1,27 @@
 <template>
-    <div class="top">
-        <div style="float: left;width: 640px">
-            <ul class="top-ul">
-                <li v-for="item in menu"><router-link to="/">{{item}}</router-link><span>|</span></li>
-            </ul>
+    <div>
+        <div class="top">
+            <div style="float: left;width: 640px">
+                <ul class="top-ul">
+                    <li v-for="item in menu"><router-link to="/">{{item}}</router-link><span>|</span></li>
+                </ul>
+            </div>
+            <div class="right-m">
+                <ul class="top-ul1">
+                    <li><a style="cursor: pointer" @click="denglu">{{login[0]}}</a><span>|</span></li>
+                    <li><router-link to="/">{{login[1]}}</router-link><span>|</span></li>
+                    <li><router-link to="/">{{login[2]}}</router-link><span>|</span></li>
+                    <li><router-link to="/">{{login[3]}}</router-link><span></span></li>
+                    <li class="gouWuChe">
+                        <a class="gouwu">
+                            <i class="el-icon-shopping-cart-2" style="width: 20px;height: 20px;font-weight: bold"></i>
+                            购物车
+                            <span class="gouwu">(0)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div>
-            <ul class="top-ul1">
-                <li><a style="cursor: pointer" @click="denglu">{{login[0]}}</a><span>|</span></li>
-                <li><router-link to="/">{{login[1]}}</router-link><span>|</span></li>
-                <li><router-link to="/">{{login[2]}}</router-link><span>|</span></li>
-                <li><router-link to="/">{{login[3]}}</router-link><span></span></li>
-                <li class="gouWuChe">
-                    <a class="gouwu">
-                        <i class="el-icon-shopping-cart-2" style="width: 20px;height: 20px;font-weight: bold"></i>
-                        购物车
-                        <span class="gouwu">(0)</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-
     </div>
 </template>
 
@@ -76,6 +76,8 @@ a:hover{
     height: 40px;
     background-color: #333333;
     color: white;
+    width: 1500px;
+    //border: 0.5px solid red;
 
     .top-ul{
         margin-left: 140px;
@@ -89,9 +91,17 @@ a:hover{
             }
         }
     }
+
+    .right-m{
+        float: right;
+        width: 400px;
+        margin-right: 103px;
+        //border: 0.5px solid red;
+    }
     .top-ul1{
         height: 40px;
-        margin-left: 1000px;
+        width: 400px;
+        //margin-left: 1000px;
 
         li{
             width: 50px;

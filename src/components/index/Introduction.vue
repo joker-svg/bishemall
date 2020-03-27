@@ -1,26 +1,28 @@
 <template>
-    <div class="index-intro">
-        <div class="intro-title">
-            <img src="../../assets/img/c10.png" alt="">
-            <p class="p1">猜你喜欢</p>
-            <p class="p2">Guess you like</p>
+    <div>
+        <div class="index-intro">
+            <div class="intro-title">
+                <img src="../../assets/img/c10.png" alt="">
+                <p class="p1">猜你喜欢</p>
+                <p class="p2">Guess you like</p>
 
-            <div class="intro-s">
-                <p>查看全部</p>
-                <div class="i-con">
-                    <i class="el-icon-right"></i>
+                <div class="intro-s">
+                    <p>查看全部</p>
+                    <div class="i-con">
+                        <i class="el-icon-right"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="intro-content">
-            <div class="intro-good" v-for="item in 10">
-                <img src="../../assets/img/intro01.jpg" alt="">
-                <p class="intro-p1 p4">全面屏电视E55A</p>
-                <p class="intro-p2 p4">全面屏设计，人工智能语音{{item}}</p>
-                <p class="intro-p3">￥55.0</p>
-                <div class="s-save">
-                    <i class="el-icon-star-off"></i>
-                    <p>收藏</p>
+            <div class="intro-content">
+                <div class="intro-good" v-for="item in 10">
+                    <img src="../../assets/img/intro01.jpg" alt="">
+                    <p class="intro-p1 p4">全面屏电视E55A</p>
+                    <p class="intro-p2 p4">全面屏设计，人工智能语音{{item}}</p>
+                    <p class="intro-p3">￥55.0</p>
+                    <div class="s-save">
+                        <i class="el-icon-star-off"></i>
+                        <p>收藏</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,7 +155,7 @@
                 color: #99a9bf;
             }
             .intro-p3{
-                color: red;
+                color: @theme-color;
                 margin-left: 21px;
                 margin-top: 15px;
                 width: 50px;

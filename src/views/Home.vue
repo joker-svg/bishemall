@@ -11,12 +11,14 @@
     <!--搜索-->
     <Search></Search>
     <!--轮播图-->
-    <Lunbo></Lunbo>
+<!--    <Lunbo></Lunbo>-->
+    <test></test>
     <!--特点链接-->
     <Lianjie></Lianjie>
 
     <Introduction></Introduction>
     <Discount></Discount>
+    <Goods></Goods>
 
     <!--底部-->
     <Bottom></Bottom>
@@ -34,6 +36,8 @@ import Lianjie from "../components/index/Lianjie";
 import Bottom from "../components/Bottom";
 import Introduction from "../components/index/Introduction";
 import Discount from "../components/index/Discount";
+import Goods from "../components/index/Goods";
+import test from "../components/index/test";
 
 export default {
   name: 'Home',
@@ -47,6 +51,8 @@ export default {
     Bottom,
     Introduction,
     Discount,
+    Goods,
+    test,
   }
 }
 </script>
@@ -58,9 +64,12 @@ export default {
 }
   .header-image{
     height: 118px;
+    //width: 100%;
+    //float: left;
     img{
-      width: 100%;
       margin-bottom: 0;
+      width: 1500px;
+      height: 118px;
     }
   }
 </style>

@@ -1,32 +1,34 @@
 <template>
-    <div class="search-div">
-        <div class="icon">
-            <img v-bind:src="imgSrc" alt="">
-        </div>
-        <div class="menubar">
-            <ul>
-                <li v-for="(item,index) in menu" @mouseover="boxshow(index)" @mouseout="boxhide(index)">
-                    <router-link to="/">{{item}}</router-link>
-                </li>
-            </ul>
-        </div>
-        <div class="search">
-            <input class="content" v-model="inputin" placeholder="请输入内容" type="search">
-            <input type="submit" class="btnSearch" value="">
-        </div>
+    <div>
+        <div class="search-div">
+            <div class="icon">
+                <img v-bind:src="imgSrc" alt="">
+            </div>
+            <div class="menubar">
+                <ul>
+                    <li v-for="(item,index) in menu" @mouseover="boxshow(index)" @mouseout="boxhide(index)">
+                        <router-link to="/">{{item}}</router-link>
+                    </li>
+                </ul>
+            </div>
+            <div class="search">
+                <input class="content" v-model="inputin" placeholder="请输入内容" type="search">
+                <input type="submit" class="btnSearch" value="">
+            </div>
 
-        <div v-for="(item ,index) in 6">
-            <transition name="el-zoom-in-top">
-                <div v-show="isTrue[index].hide" class="transition-box" @mouseover="boxshow(index)" @mouseout="boxhide(index)">
-                    <div class="picture-box" v-for="(item,index) in picture">
-                        <img v-bind:src="item.psrc" alt="">
-                        <p class="p01">{{item.describe}}</p>
-                        <p class="p02">{{item.price}}元起</p>
+            <div v-for="(item ,index) in 6">
+                <transition name="el-zoom-in-top">
+                    <div v-show="isTrue[index].hide" class="transition-box" @mouseover="boxshow(index)" @mouseout="boxhide(index)">
+                        <div class="picture-box" v-for="(item,index) in picture">
+                            <img v-bind:src="item.psrc" alt="">
+                            <p class="p01">{{item.describe}}</p>
+                            <p class="p02">{{item.price}}元起</p>
+                        </div>
                     </div>
-                </div>
-            </transition>
-        </div>
+                </transition>
+            </div>
 
+        </div>
     </div>
 </template>
 
@@ -68,12 +70,14 @@
         float: left;
         height: 50px;
         margin-top: 25px;
-        //border: 0.5px solid;
+        //border: 0.5px solid red;
     }
 
     .search-div{
-        width: 100%;
+        //width: 100%;
+        width: 1500px;
         height: 100px;
+        //border: 0.5px solid red;
     }
 
     .icon{
@@ -82,7 +86,6 @@
         margin-left: 140px;
     }
     .menubar{
-        //.bao;
         float: left;
         height: 100px;
         width: 447px;
@@ -104,7 +107,10 @@
         }
     }
     .search{
-        .bao;
+        //.bao;
+        float: left;
+        height: 50px;
+        margin-top: 25px;
         width: 310px;
         margin-left: 150px;
         .content{
@@ -137,7 +143,7 @@
         height: 220px;
         background-color: white;
         position: absolute;
-        z-index: 9;
+        z-index: 98;
         margin-top: 100px;
         border-top: 0.5px solid @theme-color;
         box-shadow: 4px 2px 2px rgba(0,0,0,0.4);
