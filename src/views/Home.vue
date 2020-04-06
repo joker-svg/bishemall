@@ -1,5 +1,6 @@
 <template>
   <div class="home" id="top">
+<!--    <HelloWorld></HelloWorld>-->
     <!--右侧侧边栏-->
     <RightMenu style="float: right"></RightMenu>
     <!--顶部图片-->
@@ -11,8 +12,7 @@
     <!--搜索-->
     <Search></Search>
     <!--轮播图-->
-<!--    <Lunbo></Lunbo>-->
-    <test></test>
+    <Lunbo_com></Lunbo_com>
     <!--特点链接-->
     <Lianjie></Lianjie>
 
@@ -27,17 +27,18 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
-import Top from '@/components/index/Top.vue';
-import Search from '@/components/index/Search.vue';
-import Lunbo from '@/components/index/Lunbo.vue';
+import HelloWorld from '../components/HelloWorld.vue';
+import Top from '../components/index/Top.vue';
+import Search from '../components/index/Search.vue';
+import Lunbo from '../components/index/Lunbo.vue';
 import RightMenu from "../components/index/RightMenu";
 import Lianjie from "../components/index/Lianjie";
 import Bottom from "../components/Bottom";
 import Introduction from "../components/index/Introduction";
 import Discount from "../components/index/Discount";
 import Goods from "../components/index/Goods";
-import test from "../components/index/test";
+import Lunbo_com from "../components/index/Lunbo_com";
+import Login from "../components/user/Login";
 
 export default {
   name: 'Home',
@@ -52,7 +53,8 @@ export default {
     Introduction,
     Discount,
     Goods,
-    test,
+    Lunbo_com,
+    Login
   }
 }
 </script>

@@ -37,20 +37,50 @@
             <div class="content-box">
                 <!--我的信息-->
                 <transition name="fade">
-                    <div class="box" v-show="show[0].hide">
-                        我的信息
+                    <div class="box" style="background-color: #e8e8e8" v-show="show[0].hide">
+                        <div class="box-infor">
+                            <div class="btn-close" @click="isShowEvent(0)">
+                                <p>关闭</p>
+                                <i class="el-icon-d-arrow-right"></i>
+                            </div>
+                        </div>
+
+                        <div class="user-login">
+                            <div class="login-1">
+                                <ul>
+                                    <li class="li-1">用户登录</li>
+                                    <li class="li-2">扫码登录</li>
+                                </ul>
+                            </div>
+                            <div class="login-2">
+                                <Login></Login>
+                            </div>
+
+                            <router-link to="/" class="link-add">
+                                注册新账号
+                            </router-link>
+
+                            <div class="info-bo">
+                                <p class="bo-p">——————</p>
+                                <p>其他账号登录</p>
+                                <p class="bo-p">——————</p>
+                                <div class="tb qq"></div>
+                                <div class="tb zfb"></div>
+                                <div class="tb wx"></div>
+                            </div>
+                        </div>
                     </div>
                 </transition>
 
                 <!--购物车-->
                 <transition name="fade">
-                    <div class="box" style="background-color: #262626" v-show="show[1].hide">
+                    <div class="box" style="background-color: grey" v-show="show[1].hide">
                         购物车
                     </div>
                 </transition>
                 <!--我的收藏-->
                 <transition name="fade">
-                    <div class="box" style="background-color: #FF6700" v-show="show[2].hide">
+                    <div class="box" style="background-color: #262626" v-show="show[2].hide">
                         我的收藏
                     </div>
                 </transition>
@@ -73,8 +103,12 @@
 <script>
 
     import New from '../../new';
+    import Login from "../user/Login";
 
     export default {
+        components:{
+            Login,
+        },
         data(){
             return{
                 drawer: false,
@@ -95,6 +129,7 @@
         },
 
         methods:{
+            //右侧侧边栏显示事件
             leftShowEvent:function () {
                 this.right = '-290px';
                 this.isShow = !this.isShow;
@@ -201,6 +236,7 @@
                     }
                 }
             },
+            //屏幕滚动事件
             backTop:function (step) {
                 //参数step表示时间间隔的幅度大小，以此来控制速度
                 //当回到页面顶部的时候需要将定时器清除
@@ -275,6 +311,138 @@
             width: 290px;
             height: 100%;
             position: absolute;
+        }
+        //我的信息
+        .box-infor{
+            height: 40px;
+            width: 290px;
+            background-color: #F2F2F2;
+
+            .btn-close{
+                //color: white;
+                width: 50px;
+                height: 40px;
+                margin-left: 5px;
+                p{
+                    float: left;
+                    line-height: 40px;
+                }
+                .el-icon-d-arrow-right{
+                    line-height: 40px;
+                    margin-left: 2px;
+                }
+            }
+            .btn-close:hover{
+                cursor: pointer;
+                color: red;
+            }
+        }
+        .active{
+            display: none;
+        }
+        //登录
+        .user-login {
+            width: 250px;
+            height: 350px;
+            margin-left: 20px;
+            margin-top: 70px;
+            //position: absolute;
+
+            .login-1 {
+                width: 250px;
+                height: 30px;
+
+                li {
+                    list-style: none;
+                    float: left;
+                    font-size: 18px;
+                    font-weight: bold;
+                    width: 120px;
+                    line-height: 30px;
+                    text-align: center;
+                    color: @theme-color;
+                }
+
+                .li-1 {
+                    border-right: 0.5px solid #d2d2d2;
+                    text-align: left;
+                    //padding-left: 10px;
+                }
+
+                .li-2 {
+                    text-align: right;
+                }
+            }
+            .a1{
+                position: absolute;
+            }
+            .login-2{
+                margin-top: 30px;
+                float: left;
+            }
+
+            .link-add{
+                font-size: 13px;
+                color: blue;
+                margin-left: 90px;
+                float: left;
+                margin-top: 35px;
+                text-decoration: none;
+            }
+            .link-add:hover{
+                color: @theme-color;
+                border-bottom: 0.5px solid @theme-color;
+            }
+            .info-bo{
+                margin-top: 50px;
+                float: left;
+                p{
+                    font-size: 12px;
+                    color: grey;
+                    float: left;
+                    margin-left: 5px;
+                }
+                .bo-p{
+                    color: #cecece;
+                }
+
+                .tb{
+                    width: 40px;
+                    height: 40px;
+                    background-color: #99a9bf;
+                    float: left;
+                    border-radius: 20px;
+                    margin-top: 20px;
+                    margin-left: 33px;
+                }
+                .tb:hover{
+                    cursor: pointer;
+                }
+                .qq{
+                    background-image: url("../../assets/img/tb01.png");
+                    background-size: 42px 42px;
+                }
+                .qq:hover{
+                    background-image: url("../../assets/img/tb04.png");
+                    background-size: 42px 42px;
+                }
+                .zfb{
+                    background-image: url("../../assets/img/tb02.png");
+                    background-size: 42px 42px;
+                }
+                .zfb:hover{
+                    background-image: url("../../assets/img/tb05.png");
+                    background-size: 42px 42px;
+                }
+                .wx{
+                    background-image: url("../../assets/img/tb03.png");
+                    background-size: 42px 42px;
+                }
+                .wx:hover{
+                    background-image: url("../../assets/img/tb06.png");
+                    background-size: 42px 42px;
+                }
+            }
         }
 
     }

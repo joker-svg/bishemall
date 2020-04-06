@@ -237,7 +237,7 @@
         .box4-d1{
             width: 50px;
             height: 25px;
-            margin-left: 5px;
+            margin-left: 23px;
             margin-top: 5px;
             p{
                 width: 50px;
@@ -269,7 +269,7 @@
                 .p1{
                     font-size: 13px;
                     width: 40px;
-                    margin-left: 13px;
+                    margin-left: 28px;
                     font-weight: bold;
                     color: #5f5f5f;
                 }

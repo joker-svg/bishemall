@@ -2,7 +2,8 @@
     <div>
         <div class="search-div">
             <div class="icon">
-                <img v-bind:src="imgSrc" alt="">
+<!--                <img v-bind:src="imgSrc" alt="">-->
+                <p>{{nowDate}}</p>
             </div>
             <div class="menubar">
                 <ul>
@@ -46,10 +47,18 @@
                             {kind:"手机",psrc:require("../../assets/img/top01.jpg"),describe:"华为荣耀20",price:2000},
                             {kind:"手机",psrc:require("../../assets/img/top01.jpg"),describe:"华为荣耀20",price:2000},
                             {kind:"手机",psrc:require("../../assets/img/top01.jpg"),describe:"华为荣耀20",price:2000},
-                            {kind:"手机",psrc:require("../../assets/img/top01.jpg"),describe:"华为荣耀20",price:2000}]
+                            {kind:"手机",psrc:require("../../assets/img/top01.jpg"),describe:"华为荣耀20",price:2000}],
+                nowDate:"",
             }
         },
         methods:{
+            currentTime() {
+                setInterval(this.getDate,500);
+            },
+            getDate:function () {
+                let dd = new Date().getDate();
+                this.nowDate = dd;
+            },
             boxshow:function (index) {
                 this.isTrue[index].hide=!this.isTrue[index].hide;
                 this.show2=!this.show2;
@@ -58,6 +67,15 @@
             boxhide:function (index) {
                 this.isTrue[index].hide=!this.isTrue[index].hide;
                 this.show2=!this.show2;
+            }
+        },
+        mounted() {
+            this.currentTime();
+        },
+        beforeDestroy() {
+            if (this.getDate) {
+                console.log("销毁定时器");
+                clearInterval(this.getDate); // 在Vue实例销毁前，清除时间定时器
             }
         }
     }
@@ -84,6 +102,17 @@
         .bao;
         width: 50px;
         margin-left: 140px;
+        //border: 0.5px solid;
+        background-color: #9d9d9d;
+
+        p{
+            line-height: 50px;
+            width: 50px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+        }
     }
     .menubar{
         float: left;
