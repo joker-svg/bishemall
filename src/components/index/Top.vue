@@ -8,10 +8,30 @@
             </div>
             <div class="right-m">
                 <ul class="top-ul1">
-                    <li><a style="cursor: pointer" @click="denglu">{{login[0]}}</a><span>|</span></li>
-                    <li><router-link to="/">{{login[1]}}</router-link><span>|</span></li>
-                    <li><router-link to="/">{{login[2]}}</router-link><span>|</span></li>
-                    <li><router-link to="/">{{login[3]}}</router-link><span></span></li>
+                    <li v-if="login_user">
+                        <a style="cursor: pointer" @click="denglu">{{login[0]}}</a>
+                        <span>|</span>
+                    </li>
+                    <li v-if="!login_user">
+                        <a style="cursor: pointer" >欢迎</a>
+                        <span>|</span>
+                    </li>
+                    <li v-if="login_user">
+                        <router-link to="/">{{login[1]}}</router-link>
+                        <span>|</span>
+                    </li>
+                    <li v-if="!login_user">
+                        <router-link to="/">退出</router-link>
+                        <span>|</span>
+                    </li>
+                    <li>
+                        <router-link to="/">{{login[2]}}</router-link>
+                        <span>|</span>
+                    </li>
+                    <li>
+                        <router-link to="/">{{login[3]}}</router-link>
+                        <span></span>
+                    </li>
                     <li class="gouWuChe">
                         <a class="gouwu">
                             <i class="el-icon-shopping-cart-2" style="width: 20px;height: 20px;font-weight: bold"></i>
@@ -33,7 +53,8 @@
             return{
                 menu:["电子商城","优质服务","开放平台","组队团购","资格证书","协议规则","下载app"],
                 login:["登录","注册","消息","导航"],
-                iconsrc:"../assets/logo.png"
+                iconsrc:"../assets/logo.png",
+                login_user:true
             }
         },
         methods:{

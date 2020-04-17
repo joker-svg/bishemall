@@ -3,11 +3,22 @@
         <div class="home">
             <div class="box1">
                 <div class="tou-xiang">
-                    <el-avatar class="tou-img" src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1175653880,3144803355&fm=26&gp=0.jpg"></el-avatar>
+                    <el-avatar
+                            class="tou-img"
+                            src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1175653880,3144803355&fm=26&gp=0.jpg">
+                    </el-avatar>
                 </div>
                 <div class="tou-xiang-right">
-                    <p class="p1">您好！请</p>
-                    <p class="p2">登录/注册</p>
+                    <div class="txr-d">
+                        <div v-if="loginShow">
+                            <p class="p1">您好！请</p>
+                            <p class="p2" @click="denglu">登录/注册</p>
+                        </div>
+                        <div style="position: absolute" v-if="!loginShow">
+                            <p class="p1">欢迎您，{{$store.state.userInfo.user.username}}</p>
+                        </div>
+                    </div>
+
                     <div class="tou-d1 d">
                         <p>新人福利</p>
                     </div>
@@ -70,8 +81,11 @@
 </template>
 
 <script>
+    import store from '../../store/modules/user';
+    import New from "../../new";
 
     export default {
+        store,
         data(){
             return{
                 timg:[{img:require("../../assets/img/box21.png"),name:"手机充值"},
@@ -81,7 +95,13 @@
                     {img:require("../../assets/img/box21.png"),name:"手机充值"},
                     {img:require("../../assets/img/box21.png"),name:"手机充值"},
                     {img:require("../../assets/img/box21.png"),name:"手机充值"},
-                    {img:require("../../assets/img/box21.png"),name:"手机充值"}]
+                    {img:require("../../assets/img/box21.png"),name:"手机充值"}],
+                loginShow:true
+            }
+        },
+        methods:{
+            denglu:function () {
+                New.$emit('getisshow',true);
             }
         }
     }
@@ -133,19 +153,26 @@
                 margin-left: 20px;
                 float: left;
                 height: 65px;
-                //border: 0.5px solid;
                 border-right: 0.5px solid #dfdfdf;
 
-                p{
-                    float: left;
+                .txr-d{
+                    height: 25px;
+                    p{
+                        float: left;
+                    }
+                    .p1{
+                        color: grey;
+                        margin-right: 5px;
+                    }
+                    .p2{
+                        color: #424242;
+                    }
+                    .p2:hover{
+                        color: @theme-color;
+                        cursor: pointer;
+                    }
                 }
-                .p1{
-                    color: grey;
-                    margin-right: 5px;
-                }
-                .p2{
-                    color: #424242;
-                }
+
                 .d{
                     //border: 0.5px solid;
                     float: left;

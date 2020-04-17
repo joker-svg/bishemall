@@ -1,10 +1,17 @@
 <template>
     <div>
         <div class="right" :style="{right:right}">
+<!--            菜单-->
             <div class="rightmenu">
                 <div  style="margin-top: 120px">
-                    <el-tooltip class="item" effect="dark" content="我的信息" placement="left">
-                        <el-button><i class="el-icon-user el" @click="isShowEvent(0)"></i></el-button>
+                    <el-tooltip
+                            class="item"
+                            effect="dark"
+                            content="我的信息"
+                            placement="left">
+                        <el-button>
+                            <i class="el-icon-user el" @click="isShowEvent(0)"></i>
+                        </el-button>
                     </el-tooltip>
                 </div>
                 <div class="box-left">
@@ -14,59 +21,109 @@
                     </div>
                 </div>
                 <div style="width: 40px;margin-top: 20px">
-                    <el-tooltip class="item" effect="dark" content="我的收藏" placement="left">
-                        <el-button><i class="el-icon-star-off el" @click="isShowEvent(2)"></i></el-button>
+                    <el-tooltip
+                            class="item"
+                            effect="dark"
+                            content="我的收藏"
+                            placement="left">
+                        <el-button>
+                            <i class="el-icon-star-off el" @click="isShowEvent(2)"></i>
+                        </el-button>
                     </el-tooltip>
                 </div>
                 <div style="width: 40px;margin-top: 10px">
-                    <el-tooltip class="item" effect="dark" content="浏览历史" placement="left">
-                        <el-button><i class="el-icon-time el" @click="isShowEvent(3)"></i></el-button>
+                    <el-tooltip
+                            class="item"
+                            effect="dark"
+                            content="浏览历史"
+                            placement="left">
+                        <el-button>
+                            <i class="el-icon-time el" @click="isShowEvent(3)"></i>
+                        </el-button>
                     </el-tooltip>
                 </div>
                 <div style="width: 40px;margin-top: 150px">
-                    <el-tooltip class="item" effect="dark" content="联系客服" placement="left">
-                        <el-button><i class="el-icon-service el"></i></el-button>
+                    <el-tooltip
+                            class="item"
+                            effect="dark"
+                            content="联系客服"
+                            placement="left">
+                        <el-button>
+                            <i class="el-icon-service el"></i>
+                        </el-button>
                     </el-tooltip>
                 </div>
                 <div style="width: 40px;margin-top: 10px" v-show="isActive">
-                    <el-tooltip class="item" effect="dark" content="返回顶部" placement="left">
-                        <el-button><i class="el-icon-arrow-up el" @click="backTop(step)"></i></el-button>
+                    <el-tooltip
+                            class="item"
+                            effect="dark"
+                            content="返回顶部"
+                            placement="left">
+                        <el-button>
+                            <i class="el-icon-arrow-up el" @click="backTop(step)"></i>
+                        </el-button>
                     </el-tooltip>
                 </div>
             </div>
+
+<!--            盒子-->
             <div class="content-box">
                 <!--我的信息-->
                 <transition name="fade">
-                    <div class="box" style="background-color: #e8e8e8" v-show="show[0].hide">
-                        <div class="box-infor">
-                            <div class="btn-close" @click="isShowEvent(0)">
-                                <p>关闭</p>
-                                <i class="el-icon-d-arrow-right"></i>
-                            </div>
-                        </div>
-
-                        <div class="user-login">
-                            <div class="login-1">
-                                <ul>
-                                    <li class="li-1">用户登录</li>
-                                    <li class="li-2">扫码登录</li>
-                                </ul>
-                            </div>
-                            <div class="login-2">
-                                <Login></Login>
+                    <div>
+                        <div class="box"
+                             style="background-color: #e8e8e8"
+                             v-show="show[0].hide">
+                            <div class="box-infor">
+                                <div class="btn-close" @click="isShowEvent(0)">
+                                    <p>关闭</p>
+                                    <i class="el-icon-d-arrow-right"></i>
+                                </div>
                             </div>
 
-                            <router-link to="/" class="link-add">
-                                注册新账号
-                            </router-link>
+                            <div>
+                                <div class="user-login">
+                                    <div class="login-1">
+                                        <ul>
+                                            <li class="li-1"
+                                                :class="{li_active:login_show}"
+                                                @click="loginShow(0)">
+                                                <p>用户登录</p>
+                                            </li>
+                                            <li class="li-2"
+                                                :class="{li_active:!login_show}"
+                                                @click="loginShow(1)">
+                                                <p>扫码登录</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="login-2">
+                                        <Login class="login" v-show="login_show"></Login>
+                                        <div v-show="!login_show">
+                                            <div class="sao_ma">
+                                                <img src="../../assets/img/er_wei_ma.png" alt="">
+                                            </div>
+                                            <p class="sao_ma_p">请打开app扫码登录</p>
+                                        </div>
+                                    </div>
 
-                            <div class="info-bo">
-                                <p class="bo-p">——————</p>
-                                <p>其他账号登录</p>
-                                <p class="bo-p">——————</p>
-                                <div class="tb qq"></div>
-                                <div class="tb zfb"></div>
-                                <div class="tb wx"></div>
+                                    <router-link to="/" class="link-add">
+                                        注册新账号
+                                    </router-link>
+
+                                    <div class="info-bo">
+                                        <p class="bo-p">——————</p>
+                                        <p>其他账号登录</p>
+                                        <p class="bo-p">——————</p>
+                                        <div class="tb qq"></div>
+                                        <div class="tb zfb"></div>
+                                        <div class="tb wx"></div>
+                                    </div>
+                                </div>
+
+                                <div class="box box_userInfo">
+                                    <UserInfo></UserInfo>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,8 +131,19 @@
 
                 <!--购物车-->
                 <transition name="fade">
-                    <div class="box" style="background-color: grey" v-show="show[1].hide">
-                        购物车
+                    <div>
+                        <div class="box"
+                             style="background-color: #e8e8e8"
+                             v-show="show[1].hide">
+                            <div class="box-infor">
+                                <div class="btn-close" @click="isShowEvent(1)">
+                                    <p>关闭</p>
+                                    <i class="el-icon-d-arrow-right"></i>
+                                </div>
+                            </div>
+
+                            <GouWuChe></GouWuChe>
+                        </div>
                     </div>
                 </transition>
                 <!--我的收藏-->
@@ -104,10 +172,14 @@
 
     import New from '../../new';
     import Login from "../user/Login";
+    import UserInfo from "../user/UserInfo";
+    import GouWuChe from "../user/GouWuChe";
 
     export default {
         components:{
             Login,
+            UserInfo,
+            GouWuChe
         },
         data(){
             return{
@@ -115,7 +187,8 @@
                 isShow:false,
                 right:'-290px',
                 show:[{hide:false},{hide:false},{hide:false},{hide:false}],
-                isActive:false
+                isActive:false,
+                login_show:true
             }
         },
 
@@ -129,6 +202,19 @@
         },
 
         methods:{
+            //登录方式切换
+            loginShow:function(index){
+                if(index===0){
+                    if(!this.login_show){
+                        this.login_show = !this.login_show;
+                    }
+                }else if(index===1){
+                    if(this.login_show){
+                        this.login_show = !this.login_show;
+                    }
+                }
+
+            },
             //右侧侧边栏显示事件
             leftShowEvent:function () {
                 this.right = '-290px';
@@ -313,6 +399,12 @@
             position: absolute;
         }
         //我的信息
+        .box_userInfo{
+            position: absolute;
+            background-color: white;
+            //border: 0.5px solid;
+            //display: none;
+        }
         .box-infor{
             height: 40px;
             width: 290px;
@@ -346,7 +438,7 @@
             height: 350px;
             margin-left: 20px;
             margin-top: 70px;
-            //position: absolute;
+            position: absolute;
 
             .login-1 {
                 width: 250px;
@@ -360,17 +452,28 @@
                     width: 120px;
                     line-height: 30px;
                     text-align: center;
-                    color: @theme-color;
+                    color: #3f3f3f;
                 }
-
+                li:hover{cursor: pointer}
+                .li_active{
+                    color: @theme-color;
+                    p{
+                        border-bottom: 2px solid @theme-color;
+                    }
+                }
                 .li-1 {
                     border-right: 0.5px solid #d2d2d2;
-                    text-align: left;
-                    //padding-left: 10px;
+                    p{
+                        width: 75px;
+                        float: left;
+                    }
                 }
 
                 .li-2 {
-                    text-align: right;
+                    p{
+                        width: 75px;
+                        float: right;
+                    }
                 }
             }
             .a1{
@@ -379,6 +482,29 @@
             .login-2{
                 margin-top: 30px;
                 float: left;
+                height: 250px;
+                width: 250px;
+                //border: 0.5px solid;
+
+                .login{
+                    position: absolute;
+                }
+                .sao_ma{
+                    background:white;
+                    width:200px;
+                    height:200px;
+                    margin-left: 25px;
+                    img{
+                        width: 200px;
+                        height: 200px;
+                    }
+                }
+                .sao_ma_p{
+                    width: 200px;
+                    font-size: 13px;
+                    margin-left: 65px;
+                    margin-top: 5px;
+                }
             }
 
             .link-add{

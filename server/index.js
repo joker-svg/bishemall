@@ -1,21 +1,40 @@
 // node后端服务器
 const http = require('http');
-const badyParser = require('body-parser');
+
+const bodyParser = require('body-parser');
+const expressJwt = require('express-jwt');
+const jwt = require('jsonwebtoken');
 const express = require('express');
+
 const userApi = require('./api/userApi');
 
 let app = express();
 let server = http.createServer(app);
 
-app.use(badyParser.json());
-app.use(badyParser.urlencoded({
-    extended: false
+//post请求中间件
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
 }));
+
+//jwt中间件
+app.use(expressJwt({
+    secret:"secret" //加密秘钥
+}).unless({
+    path:["/api/user/isUser","/login"]
+}));
+
+// 未携带token请求接口会出错，触发这个
+app.use(function(err, req, res, next) {
+    if (err.name === "UnauthorizedError") {
+        res.status(401).send(err);
+    }
+});
 
 // 后端api路由
 app.use('/api/user', userApi);
 
 // 启动监听
 server.listen(8888, () => {
-    console.log(' success!! port:8888')
-})
+    console.log(' success!! port:8888');
+});

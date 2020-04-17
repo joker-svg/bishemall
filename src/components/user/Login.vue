@@ -4,6 +4,7 @@
           :model="ruleForm"
           :rules="rules"
           ref="ruleForm"
+          style="width: 250px"
         >
 <!--    用户名输入框-->
             <el-form-item prop="username">
@@ -49,8 +50,10 @@
 </template>
 
 <script>
+    import store from '../../store/modules/user'
 
     export default {
+        store,
         data(){
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
@@ -94,7 +97,10 @@
                             method:"POST",
                             data:this.ruleForm
                         }).then(res => {
-                            console.log("success");
+                            //console.log(res);
+                            //调用store的方法，把用户数据传过去
+                            //this.$store.commit('setUserInfo',res.data);
+                            this.$store.commit('setUserInfo',res.data);
                         })
                     } else {
                         console.log('error submit!!');
@@ -107,12 +113,8 @@
             h_random:function () {
                 this.random = Math.floor(Math.random() *(9999-1000+1))+1000;
             },
-            // currentTime:function () {
-            //     setInterval(this.h_random,10000);
-            // }
         },
         mounted() {
-            //this.currentTime();
             this.h_random();
         },
         beforeDestroy() {
