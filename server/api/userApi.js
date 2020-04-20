@@ -6,6 +6,23 @@ const expressJwt = require('express-jwt');
 const DBHelper = require('../utils/DBHelper');
 const sql = require('../sqlMap');
 
+// 用户注册
+router.post('/addUser',(req,res) => {
+    let sqlStr = sql.user.add;
+    let params = req.body;
+    let conn = new DBHelper().getConn();
+    conn.query(sqlStr,
+        [params.username,params.password,params.phone,params.email],
+        (err, result) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(result)
+        }
+    });
+    conn.end();
+});
+
 // 查询用户
 router.post('/selectUser', (req, res) => {
     let sqlStr = sql.user.select;
@@ -47,15 +64,6 @@ router.post('/isUser',(req,res) => {
     });
 
     conn.end();
-    // const secret = 'salt';
-    // const token = jwt.sign({
-    //     name: 123
-    // }, secret, {
-    //     expiresIn:  60 //秒到期时间
-    // });
-    // res.json({
-    //     token:token
-    // })
 });
 
 module.exports = router;

@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 app.use(expressJwt({
     secret:"secret" //加密秘钥
 }).unless({
-    path:["/api/user/isUser","/login"]
+    path:["/api/user/isUser","/api/user/addUser"]
 }));
 
 // 未携带token请求接口会出错，触发这个

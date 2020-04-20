@@ -107,7 +107,7 @@
                                         </div>
                                     </div>
 
-                                    <router-link to="/" class="link-add">
+                                    <router-link to="/register" class="link-add">
                                         注册新账号
                                     </router-link>
 

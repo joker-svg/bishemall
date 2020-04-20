@@ -17,7 +17,7 @@
                         <span>|</span>
                     </li>
                     <li v-if="login_user">
-                        <router-link to="/">{{login[1]}}</router-link>
+                        <router-link to="/register">{{login[1]}}</router-link>
                         <span>|</span>
                     </li>
                     <li v-if="!login_user">

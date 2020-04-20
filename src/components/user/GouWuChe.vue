@@ -17,8 +17,35 @@
                     </div>
                 </div>
                 <div class="lo-2" v-show="!gouContent">
-                    <div class="gou-item" v-for="item in 2">
+                    <div class="gou-item"
+                         v-for="(item,index) in 2"
+                         :key="index">
 
+                        <el-checkbox
+                                v-model="checkAll"
+                                @change="handleCheck"
+                                class="checkbox">
+
+                        </el-checkbox>
+                        <div class="item-content">
+                            <img src="../../assets/img/intro01.jpg" alt="" style="float: left">
+                            <div class="c content-1" style="float: left">
+                                <p class="p-name">全面屏电视E55A</p>
+                                <p class="p-type">高清55寸</p>
+                            </div>
+                            <div class="c content-2">
+                                <p class="p-price">￥55</p>
+                                <el-input-number
+                                        v-model="num"
+                                        controls-position="right"
+                                        @change="handleChange"
+                                        size="small"
+                                        style="width: 80px;height: 30px;float: right"
+                                        :min="1" :max="10">
+
+                                </el-input-number>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,7 +68,13 @@
         data(){
             return{
                 loginShow:false,
-                gouContent:false
+                gouContent:false,
+                num: 1
+            }
+        },
+        methods: {
+            handleChange(value) {
+                console.log(value);
             }
         }
     }
@@ -112,6 +145,54 @@
                     margin-left: 10px;
                     margin-right: 10px;
                     margin-top: 5px;
+                    display:flex;
+                    align-content: center;
+
+                    .checkbox{
+                        line-height: 100px;
+                        margin-left: 5px;
+                    }
+                    .item-content{
+                        width: 250px;
+                        height: 100px;
+
+                        img{
+                            width: 70px;
+                            height: 70px;
+                            margin-top: 15px;
+                            margin-left: 5px;
+                        }
+
+                        .c{
+                            height: 35px;
+                            //margin-top: 15px;
+                            //border: 0.5px solid;
+                            margin-left: 5px;
+                            float: left;
+                            p{
+                                //float: left;
+                                //border: 0.5px solid;
+                                font-size: 13px;
+                                height: 20px;
+                                line-height: 20px;
+                            }
+                        }
+                        .content-1{
+                            width: 150px;
+                            height: 40px;
+                            margin-top: 15px;
+                        }
+                        .content-2{
+                            width: 150px;
+                            .p-price{
+                                float: left;
+                                line-height: 35px;
+                                height: 35px;
+                                font-size: 16px;
+                                color: #FF6700;
+                            }
+                        }
+                    }
                 }
             }
             .lo-2::-webkit-scrollbar{

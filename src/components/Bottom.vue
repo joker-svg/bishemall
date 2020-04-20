@@ -104,7 +104,7 @@
 
     .bottom{
         width: 1500px;
-        height: 300px;
+        height: 320px;
         background-color: #e8e8e8;
         margin-top: 20px;
         padding-top: 5px;
