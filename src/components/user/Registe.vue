@@ -188,8 +188,9 @@
                             method:"POST",
                             data:this.ruleForm
                         }).then(res => {
-                            //alert("注册成功");
+                            alert("注册成功");
                             console.log(res);
+                            this.$router.push({path:'/login'});
                             //调用store的方法，把用户数据传过去
                             //this.$store.commit('setUserInfo',res.data);
                             //this.$store.commit('setUserInfo',res.data);

@@ -11,7 +11,7 @@
                     <p class="title-p1">您好，感谢您加入毕设商城</p>
                     <p class="title-p2">
                         如有账号，请点击
-                        <router-link to="/about">登录</router-link>
+                        <router-link to="/login">登录</router-link>
                     </p>
                 </div>
                 <div class="con-cont">
@@ -54,6 +54,8 @@
 
     .register-box{
         background-color: #F9F9F8;
+        width: 1500px;
+        padding-top: 20px;
 
         .reg{
             width: 1000px;
@@ -61,7 +63,7 @@
             margin-left: 280px;
 
             .reg-top{
-                margin-top: 20px;
+                //margin-top: 20px;
                 height: 100px;
                 img{
                     width: 80px;

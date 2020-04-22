@@ -2,19 +2,22 @@
     <div>
         <div class="home">
             <div class="box1">
+
                 <div class="tou-xiang">
-                    <el-avatar
-                            class="tou-img"
+                    <el-avatar class="tou-img"
                             src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1175653880,3144803355&fm=26&gp=0.jpg">
                     </el-avatar>
                 </div>
+
                 <div class="tou-xiang-right">
+
                     <div class="txr-d">
-                        <div v-if="loginShow">
+                        <div v-if="!$store.state.userInfo.token">
                             <p class="p1">您好！请</p>
                             <p class="p2" @click="denglu">登录/注册</p>
                         </div>
-                        <div style="position: absolute" v-if="!loginShow">
+
+                        <div style="position: absolute" v-else>
                             <p class="p1">欢迎您，{{$store.state.userInfo.user.username}}</p>
                         </div>
                     </div>
@@ -26,8 +29,11 @@
                         <p>会员频道</p>
                     </div>
                 </div>
+
             </div>
+
             <div class="box2">
+
                 <div class="box2-d d1">
                     <i class="el-icon-mobile-phone el"></i>
                     <p>手机充值</p>
@@ -60,10 +66,13 @@
                     <i class="el-icon-time el"></i>
                     <p>点购秒杀</p>
                 </div>
+
             </div>
+
             <div class="box3">
                 <img src="../../assets/img/box41.jpg">
             </div>
+
             <div class="box4">
                 <div class="box4-d1">
                     <p>公告</p>
@@ -96,7 +105,7 @@
                     {img:require("../../assets/img/box21.png"),name:"手机充值"},
                     {img:require("../../assets/img/box21.png"),name:"手机充值"},
                     {img:require("../../assets/img/box21.png"),name:"手机充值"}],
-                loginShow:true
+                loginShow:false
             }
         },
         methods:{

@@ -97,10 +97,11 @@
                             method:"POST",
                             data:this.ruleForm
                         }).then(res => {
-                            //console.log(res);
+                            console.log(res);
                             //调用store的方法，把用户数据传过去
                             //this.$store.commit('setUserInfo',res.data);
                             this.$store.commit('setUserInfo',res.data);
+                            this.$router.push({path:'/'});
                         })
                     } else {
                         console.log('error submit!!');
@@ -167,7 +168,8 @@
         color: @theme-color;
     }
     .btn-login{
-        background-color: #ff6559;
+        //background-color: #ff6559;
+        background-color: #E6133C;
         width: 250px;
         margin-top: 10px;
     }

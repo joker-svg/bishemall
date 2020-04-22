@@ -21,12 +21,11 @@
                          v-for="(item,index) in 2"
                          :key="index">
 
-                        <el-checkbox
-                                v-model="checkAll"
-                                @change="handleCheck"
-                                class="checkbox">
-
-                        </el-checkbox>
+<!--                        <el-checkbox-->
+<!--                                v-model="checkAll"-->
+<!--                                @change="handleCheck"-->
+<!--                                class="checkbox"-->
+<!--                        </el-checkbox>-->
                         <div class="item-content">
                             <img src="../../assets/img/intro01.jpg" alt="" style="float: left">
                             <div class="c content-1" style="float: left">
