@@ -2,13 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import PersistedState from "vuex-persistedstate"
+import axios from 'axios'
 
 Vue.use(Vuex);
-
-// const vuexPersisted= new createPersistedState({
-//     key: 'store',                //定义KEY名
-//     storage: window.localStorage,        //定义信息存储模式：window.localStorage（默认）、sessionStorage、cookie
-// });
 
 export default new Vuex.Store({
     state: {
@@ -17,14 +13,11 @@ export default new Vuex.Store({
             user:{}
         },
     },
+
     mutations: {
-        //vue项目先在后端启动，调用window下api会报错，需要使用第三方插件
-        //把store保存到本地，该插件会自动判断当前环境是服务器还是浏览器
-        //设置用户的数据的
         setUserInfo(state,data) {
             state.userInfo.user = data.result;
             state.userInfo.token = data.token;
-            //localStorage.setItem('token',JSON.stringify(data.token));
         },
         clearUserInfo(state,data){
             state.userInfo = {
@@ -33,15 +26,31 @@ export default new Vuex.Store({
             }
         }
     },
+
     //存放公共异步方法
     actions: {
+        login({commit},data){
+            //调用登录接口
+            axios({
+                url:"/api/user/isUser",
+                method:"POST",
+                data: data
+            }).then(res => {
+                //调用store的方法，把用户数据传过去
+                commit('setUserInfo',res.data);
 
+                //调用外部的成功的一个回调函数
+                Promise.resolve();
+            })
+        }
     },
+
     modules: {
 
     },
     plugins: [PersistedState({
-        storage: window.sessionStorage,
+        storage: window.localStorage,
+        key:"store",
         reducer(val) {
             return {
                 userInfo:val.userInfo

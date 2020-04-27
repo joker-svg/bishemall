@@ -92,17 +92,12 @@
 
                     if (valid) {
                         //调用登录接口
-                        this.$axios({
-                            url:"/api/user/isUser",
-                            method:"POST",
-                            data:this.ruleForm
-                        }).then(res => {
-                            console.log(res);
-                            //调用store的方法，把用户数据传过去
-                            //this.$store.commit('setUserInfo',res.data);
-                            this.$store.commit('setUserInfo',res.data);
+                        this.$store.dispatch('login',this.ruleForm).then(res => {
+                            this.$message.success("登录成功！");
                             this.$router.push({path:'/'});
-                        })
+                            //this.$router.replace({path:'/'});
+                        });
+
                     } else {
                         console.log('error submit!!');
                         return false;
@@ -120,7 +115,7 @@
         },
         beforeDestroy() {
             if (this.h_random) {
-                console.log("销毁定时器");
+                //console.log("销毁定时器");
                 clearInterval(this.h_random); // 在Vue实例销毁前，清除时间定时器
             }
         }

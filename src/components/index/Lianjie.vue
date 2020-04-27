@@ -112,6 +112,9 @@
             denglu:function () {
                 New.$emit('getisshow',true);
             }
+        },
+        mounted() {
+            //this.$store.dispatch("login");
         }
     }
 </script>

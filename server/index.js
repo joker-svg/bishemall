@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 
 const userApi = require('./api/userApi');
+const addressApi = require('./api/addressApi');
 
 let app = express();
 let server = http.createServer(app);
@@ -21,7 +22,10 @@ app.use(bodyParser.urlencoded({
 app.use(expressJwt({
     secret:"secret" //加密秘钥
 }).unless({
-    path:["/api/user/isUser","/api/user/addUser"]
+    path:["/api/user/isUser",
+            "/api/user/addUser",
+            "/api/address/selectAddress",
+            "/api/address/Address"]
 }));
 
 // 未携带token请求接口会出错，触发这个
@@ -33,6 +37,7 @@ app.use(function(err, req, res, next) {
 
 // 后端api路由
 app.use('/api/user', userApi);
+app.use('/api/address', addressApi);
 
 // 启动监听
 server.listen(8888, () => {

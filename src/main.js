@@ -10,6 +10,13 @@ Vue.config.productionTip = false;
 Vue.use(element);
 Vue.prototype.$axios = axios;
 
+//axios拦截器设置请求头Authorization
+axios.interceptors.request.use(config => {
+  //console.log(config);
+  config.headers.Authorization = window.localStorage.getItem("userInfo.token");
+  return config;
+});
+
 new Vue({
   router,
   store,
