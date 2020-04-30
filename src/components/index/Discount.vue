@@ -16,13 +16,15 @@
             </div>
             <div class="intro-content">
                 <div class="box" :style="{left:box_left}" ref="box">
-                    <div class="intro-good" v-for="(item,index) in 19"
+                    <div class="intro-good" v-for="(item,index) in goodslist"
+                         :key="index"
                          :class="{'g0':index===0,'g1':index > 0,'g2':index%3===0,'g3':index%3===1,'g4':index%3===2}">
-                        <img src="../../assets/img/intro02.jpg" alt="">
-                        <p class="intro-p1 p4">全面屏电视E55A</p>
-                        <p class="intro-p2 p4">全面屏设计，人工智能语音{{item}}</p>
-                        <p class="intro-p3">￥55.0</p>
-                        <p class="intro-p4">￥65.0</p>
+<!--                        <img src="../../assets/images/t11.jpg" alt="">-->
+<!--                        <img :src="require(item.pic_url)" alt="">-->
+                        <p class="intro-p1 p4">{{item.product_name}}</p>
+                        <p class="intro-p2 p4">{{item.product_descript}}</p>
+                        <p class="intro-p3">￥{{item.spec_price}}</p>
+                        <p class="intro-p4">￥{{item.spec_dis_price}}</p>
                         <div class="s-save">
                             <i class="el-icon-star-off"></i>
                             <p>收藏</p>
@@ -42,13 +44,23 @@
             return{
                 box_left: '0',
                 box: 0,
-                //box_width: '2600px'
+                goodslist:[{
+                    product_id: 0,
+                    product_name: '',
+                    product_descript: '',
+                    pic_url: require(''),
+                    spec_price: '',
+                    spec_dis_price: '',
+                }],
+                goodslist_length:19,
+                baseUrl:'../../assets/',
             }
         },
         methods:{
             right_scroll:function () {
                 //var f = this.$refs.box.getBoundingClientRect().width + this.box;
-                var f = 19*244.5 + this.box;
+                //19是商品数
+                var f = this.goodslist_length*244.5 + this.box;
                  if(f > 0)
                  {
                      if(f < 2450)
@@ -76,7 +88,24 @@
                         this.box_left = this.box + 'px';
                     }
                 }
+            },
+            jiekou:function () {
+                this.$axios({
+                    url:"/api/goods/selectDiscountGoods",
+                    method:"POST",
+                    data:{
+                        product_id:5
+                    }
+                }).then(res => {
+
+                    this.goodslist = res.data;
+                    this.goodslist_length = res.data.length;
+
+                });
             }
+        },
+        mounted(){
+            this.jiekou();
         }
     }
 </script>

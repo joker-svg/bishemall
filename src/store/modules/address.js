@@ -26,7 +26,7 @@ export default new Vuex.Store({
         },
         setAddressZhen(state,data) {
             if(data.length === 0){
-                state.address_zhen = {id:-1};
+                state.address_zhen = {};
                 //console.log(state.address_zhen);
             }else{
                 state.address_zhen = data;

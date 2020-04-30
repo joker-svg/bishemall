@@ -12,10 +12,22 @@ var sqlMap = {
         select_sheng:'select * from address where level = 1',
         //查找省份对应城市、县区、乡镇
         select:'select * from address where upid = ?',
-        //查找城市对应县区
-        //select_xian:'select * from address where upid = ?',
-        //查找县区对应乡镇
-        //select_zhen:'select * from address where upid = ?',
+    },
+    goods:{
+        //查询特惠特价商品
+        selectDiscount:'select product_info.product_id,' +
+                            'product_info.product_name,' +
+                            'product_info.product_descript,' +
+                            'product_picinfo.pic_url,' +
+                            'product_spec.spec_price,' +
+                            'product_spec.spec_dis_price ' +
+                        'from product_info,product_picinfo,product_spec ' +
+                        'where product_info.product_id = product_picinfo.product_id and ' +
+                                'product_info.product_id = product_spec.product_id and ' +
+                                'product_spec.spec_master = 1 and ' +
+                                'product_picinfo.is_master = 1 and ' +
+                                'product_info.product_kinds_id = 1'
+
     }
 };
 

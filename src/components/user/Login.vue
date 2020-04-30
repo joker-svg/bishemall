@@ -89,7 +89,6 @@
             //提交登录事件
             submitForm:function (formName) {
                 this.$refs[formName].validate((valid) => {
-
                     if (valid) {
                         //调用登录接口
                         this.$store.dispatch('login',this.ruleForm).then(res => {

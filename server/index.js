@@ -8,6 +8,7 @@ const express = require('express');
 
 const userApi = require('./api/userApi');
 const addressApi = require('./api/addressApi');
+const goodsApi = require('./api/goodsApi');
 
 let app = express();
 let server = http.createServer(app);
@@ -25,7 +26,8 @@ app.use(expressJwt({
     path:["/api/user/isUser",
             "/api/user/addUser",
             "/api/address/selectAddress",
-            "/api/address/Address"]
+            "/api/address/Address",
+            "/api/goods/selectDiscountGoods"]
 }));
 
 // 未携带token请求接口会出错，触发这个
@@ -38,6 +40,7 @@ app.use(function(err, req, res, next) {
 // 后端api路由
 app.use('/api/user', userApi);
 app.use('/api/address', addressApi);
+app.use('/api/goods', goodsApi);
 
 // 启动监听
 server.listen(8888, () => {
