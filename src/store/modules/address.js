@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import PersistedState from "vuex-persistedstate"
 import axios from 'axios'
 
 Vue.use(Vuex);
@@ -12,6 +11,13 @@ export default new Vuex.Store({
         address_city:[{id:'',name:'',level:'',upid:''}],
         address_xian:[{id:'',name:'',level:'',upid:''}],
         address_zhen:[{}],
+        product:{
+            productInfo:[{}],
+            proImg:[{}],
+            proSpec:[{}],
+            proColor:[{}]
+        },
+        img_master:''
     },
 
     mutations: {
@@ -37,6 +43,20 @@ export default new Vuex.Store({
         clearAddressZhen(state,data) {
             state.address_zhen = [{id:'0',name:'0',level:'0',upid:'0'}];
         },
+        //获取商品
+        setProduct(state,data) {
+            //state.goodslist = data;
+            state.product.productInfo = data.productInfo;
+            state.product.proImg = data.proImg;
+            state.product.proSpec = data.proSpec;
+            state.product.proColor = data.proColor;
+
+            for(var i = 0;i<state.product.proImg.length;i++){
+                if(state.product.proImg[i].is_master){
+                    state.img_master = state.product.proImg[i].pic_url;
+                }
+            }
+        }
     },
 
     //存放公共异步方法
@@ -83,6 +103,18 @@ export default new Vuex.Store({
             }).then(res => {
                 //console.log(res.data.length);
                 commit('setAddressZhen',res.data);
+                Promise.resolve();
+            })
+        },
+        //获取特惠特价商品
+        getProduct({commit},data){
+            //调用接口
+            axios({
+                url:"/api/goods/selectProduct",
+                method:"POST",
+                data: data
+            }).then(res => {
+                commit('setProduct',res.data);
                 Promise.resolve();
             })
         },

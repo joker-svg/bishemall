@@ -13,7 +13,7 @@
                     <div class="productLeft">
                         <!-- 左侧中图  -->
                         <div class="mdImg">
-                            <img :src="qall" alt="">
+                            <img :src="$store.state.img_master" alt="">
                         </div>
                         <!-- 遮罩层  -->
                         <div v-show="isShow"
@@ -39,7 +39,7 @@
                         </div>
 
                         <div v-show="isShow" class="lgImg">
-                            <img :src="qallBig"
+                            <img :src="$store.state.img_master"
                                  alt=""
                                  :style="{top:topLgImg+'px',left:leftLgImg+'px'}"
                             >
@@ -56,9 +56,10 @@
                     <div class="img-lun">
                         <div class="lun-box" :style="{left:box_left,width:width}">
                             <div class="img-box"
-                                 :class="{'first-box':index===0}"
-                                 v-for="(item,index) in 6">
-                                <img src="../../assets/img/intro01.jpg" alt="">
+                                 :class="{'first-box':index===0,imgActive:$store.state.product.proImg[index].is_master}"
+                                 @click="imgClick(index)"
+                                 v-for="(item,index) in $store.state.product.proImg">
+                                <img :src="item.pic_url" alt="">
                             </div>
                         </div>
                     </div>
@@ -78,26 +79,39 @@
 
             <div class="goods">
                 <ul>
-                    <p class="g-name">荣耀9X 麒麟810 4000mAh超强续航 4800万超清夜拍 6.59英寸升降全面屏 全网通8GB+128GB 魅海蓝</p>
+                    <p class="g-name">
+                        {{$store.state.product.productInfo[0].product_name}}
+                        {{$store.state.product.productInfo[0].product_descript}}
+                    </p>
                 </ul>
                 <ul>
                     <p class="g-describe">此商品由商家直接配送至您的家中，敬请等候…（新老包装随机发放）</p>
                 </ul>
 
+<!--                价格-->
                 <div class="g-price">
 
                     <div class="price-title">
                         <p>精选</p>
                     </div>
-
-                    <div class="price">
-                        <div class="price-1">
-                            <p>销售价：</p>
-                            <p class="money-icon">￥</p>
-                            <p class="money">9999</p>
+                    <div v-for="(item,index) in $store.state.product.proSpec"
+                         v-if="item.spec_master">
+                        <div class="price" v-if="item.spec_dis_price">
+                            <div class="price-1">
+                                <p>销售价：</p>
+                                <p class="money-icon">￥</p>
+                                <p class="money">{{item.spec_dis_price}}</p>
+                            </div>
+                            <div class="price-2">
+                                <p>原价：{{item.spec_price}}元</p>
+                            </div>
                         </div>
-                        <div class="price-2">
-                            <p>促销：</p>
+                        <div class="price" v-else>
+                            <div class="price-1">
+                                <p>销售价：</p>
+                                <p class="money-icon">￥</p>
+                                <p class="money">{{item.spec_price}}</p>
+                            </div>
                         </div>
                     </div>
 
@@ -210,16 +224,27 @@
                 <div class="g-select">
                     <div class="s-color">
                         <p>选择颜色</p>
-                        <div class="box-color" v-for="item in 4">
-                            <img src="../../assets/img/intro01.jpg">
-                            <p>魅海蓝</p>
+                        <div>
+                            <div class="box-color"
+                                 :class="{colorActive:$store.state.product.proColor[index].color_master}"
+                                 @click="colorClick(index)"
+                                 v-for="(item,index) in $store.state.product.proColor">
+
+                                <img src="../../assets/img/intro01.jpg">
+                                <p>{{item.color_name}}</p>
+                            </div>
                         </div>
                     </div>
 
                     <div class="s-kinds">
                         <p>选择版本</p>
                         <div class="box-kinds">
-                            <p class="p-kinds" v-for="item in 4">全网通 (6GB 64GB)</p>
+                            <p class="p-kinds"
+                               :class="{kindsActive:$store.state.product.proSpec[index].spec_master}"
+                               @click="kindsClick(index)"
+                               v-for="(item,index) in $store.state.product.proSpec">
+                                {{item.spec_name}}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -258,6 +283,9 @@
         store,
         data(){
             return{
+                //商品id
+                product_id:null,
+
                 color:[{color:''}],
                 address: "--请选择--",
                 address_item:[{id:0,name:"--请选择--"},
@@ -270,9 +298,6 @@
                 num: 1,
 
                 isPC:true,
-                // 大图片
-                qall: require("../../assets/img/intro01.jpg"),
-                qallBig: require("../../assets/img/intro01.jpg"),
                 isShow:false,   //控制遮罩层marks和大图片是否显示"
                 left:0,       //marks左移位置
                 top:0,         //marks下移位置
@@ -281,7 +306,16 @@
 
                 box_left: '0',
                 box:0,
-                width:'624px'
+                width:'624px',
+                //商品信息
+                product:{
+                    productInfo:[],
+                    proImg:this.$store.state.product.proImg,
+                    proSpec:[],
+                    proColor:[]
+                },
+                img_Count:this.$store.state.product.proImg.length,
+                specShow:[{selected:false},]
             }
         },
         methods:{
@@ -385,6 +419,13 @@
 
             },
 
+            //获取商品
+            getProduct:function(){
+                this.$store.dispatch('getProduct',{product_id:this.product_id}).then(res =>{
+
+                });
+            },
+
             //鼠标进入和离开
             enter(){
                 this.isShow=true;
@@ -419,7 +460,7 @@
             },
             //图片移动
             left_scroll:function () {
-                let f = 6*105 + this.box;//右边剩余长度
+                let f = this.img_Count*105 + this.box;//右边剩余长度
                 if(f > 0){
                     if(f > 420){
                         this.box = this.box-105;
@@ -432,10 +473,40 @@
                     this.box = this.box+105;
                     this.box_left = this.box + 'px';
                 }
+            },
+
+            //点击事件
+            imgClick:function (index) {
+                this.$store.state.img_master = this.$store.state.product.proImg[index].pic_url;
+
+                var imgList = this.$store.state.product.proImg;
+                for(var i=0;i<imgList.length;i++){
+                    this.$store.state.product.proImg[i].is_master = 0;
+                }
+
+                this.$store.state.product.proImg[index].is_master = 1;
+
+            },
+            kindsClick:function (index) {
+                var specList = this.$store.state.product.proSpec;
+                for(var i=0;i<specList.length;i++){
+                    this.$store.state.product.proSpec[i].spec_master = 0;
+                }
+
+                this.$store.state.product.proSpec[index].spec_master = 1;
+            },
+            colorClick:function (index) {
+                var colorList = this.$store.state.product.proColor;
+                for(var i=0;i<colorList.length;i++){
+                    this.$store.state.product.proColor[i].color_master = 0;
+                }
+
+                this.$store.state.product.proColor[index].color_master = 1;
             }
         },
         mounted() {
             this.select();
+            this.getProduct();
 
             if (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i,)) {
                 this.isPC = false;
@@ -444,6 +515,14 @@
                 console.log('PC端')
 
             }
+        },
+        created() {
+            //获取商品 id
+            this.product_id = this.$route.params.id;
+
+        },
+        computed:{
+
         }
     }
 </script>
@@ -608,6 +687,10 @@
                             }
                             .first-box{
                                 margin-left: 0;
+                                //border: 0.5px solid #F64654;
+                            }
+
+                            .imgActive{
                                 border: 0.5px solid #F64654;
                             }
                         }
@@ -723,19 +806,19 @@
                         }
                         .price-2{
                             float: left;
+                            width: 50%;
+                            height: 80px;
+
+                            p{
+                                line-height: 80px;
+                                width: 120px;
+                                float: left;
+                                color: grey;
+                                font-size: 14px;
+                            }
                         }
                     }
 
-                    .price-2{
-                        float: left;
-                        p{
-                            line-height: 80px;
-                            width: 60px;
-                            float: left;
-                            color: grey;
-                            font-size: 14px;
-                        }
-                    }
                 }
 
                 .g-function(){
@@ -909,6 +992,12 @@
                         height: 50px;
                         margin-top: 15px;
 
+
+                        .box-color:hover{
+                            cursor: pointer;
+                            border: 0.5px solid #E43033;
+                        }
+
                         .box-color{
                             width: 100px;
                             height: 50px;
@@ -933,6 +1022,10 @@
                                 text-align: center;
                                 color: #666666;
                             }
+                        }
+
+                        .colorActive{
+                            border: 0.5px solid #E43033;
                         }
                     }
 
@@ -963,6 +1056,14 @@
                                 margin-left: 10px;
                                 margin-top: 10px;
                                 border: 0.5px solid #b0b0b0;
+                            }
+                            .p-kinds:hover{
+                                cursor: pointer;
+                                border: 0.5px solid #E43033;
+                            }
+
+                            .kindsActive{
+                                border: 0.5px solid #E43033;
                             }
                         }
                     }

@@ -27,6 +27,7 @@ app.use(expressJwt({
             "/api/user/addUser",
             "/api/address/selectAddress",
             "/api/address/Address",
+            "/api/goods/selectProduct",
             "/api/goods/selectDiscountGoods"]
 }));
 

@@ -26,7 +26,15 @@ var sqlMap = {
                                 'product_info.product_id = product_spec.product_id and ' +
                                 'product_spec.spec_master = 1 and ' +
                                 'product_picinfo.is_master = 1 and ' +
-                                'product_info.product_kinds_id = 1'
+                                'product_info.product_kinds_id = 1',
+        //根据商品id查询对应商品
+        selectProduct:'select * from product_info  where product_id = ?',
+        //查询商品对应颜色
+        selectProductColor:'select * from product_color where product_id = ?',
+        //查询商品图片
+        selectProductImage:'select * from product_picinfo where product_id = ?',
+        //查询商品规格
+        selectProductSpec:'select * from product_spec where product_id = ?'
 
     }
 };
