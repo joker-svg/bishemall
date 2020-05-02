@@ -8,7 +8,7 @@
             </div>
             <div class="right-m">
                 <ul class="top-ul1">
-                    <li class="login-li" v-if="!$store.state.userInfo.token">
+                    <li class="login-li" v-if="!$store.state.user.userInfo.token">
                         <ul>
                             <li>
                                 <a style="cursor: pointer" @click="denglu">{{login[0]}}</a>
@@ -23,7 +23,7 @@
                     <li class="login-li reg" v-else>
                         <el-dropdown @command="handleCommand" placement="bottom">
                               <span class="el-dropdown-link">
-                                  Hi, {{$store.state.userInfo.user.username}}
+                                  Hi, {{$store.state.user.userInfo.user.username}}
                                   <i class="el-icon-arrow-down el-icon--right"></i>
                               </span>
                             <el-dropdown-menu slot="dropdown" style="width: 100px;">
@@ -57,10 +57,10 @@
 
 <script>
     import New from '../../new';
-    import store from '../../store/modules/user'
+    //import store from '../../store/modules/user'
 
     export default {
-        store,
+        //store,
         data(){
             return{
                 menu:["电子商城","优质服务","开放平台","组队团购","资格证书","协议规则","下载app"],

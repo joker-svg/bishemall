@@ -18,7 +18,7 @@
                         </div>
 
                         <div style="position: absolute" v-else>
-                            <p class="p1">欢迎您，{{$store.state.userInfo.user.username}}</p>
+                            <p class="p1">欢迎您，{{$store.state.user.userInfo.user.username}}</p>
                         </div>
                     </div>
 
@@ -90,11 +90,11 @@
 </template>
 
 <script>
-    import store from '../../store/modules/user';
+    //import store from '../../store/modules/user';
     import New from "../../new";
 
     export default {
-        store,
+        //store,
         data(){
             return{
                 timg:[{img:require("../../assets/img/box21.png"),name:"手机充值"},

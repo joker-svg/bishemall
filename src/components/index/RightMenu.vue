@@ -82,7 +82,7 @@
                             </div>
 
                             <div>
-                                <div class="user-login" v-if="!$store.state.userInfo.token">
+                                <div class="user-login" v-if="!$store.state.user.userInfo.token">
                                     <div class="login-1">
                                         <ul>
                                             <li class="li-1"
@@ -175,10 +175,10 @@
     import Login from "../user/Login";
     import UserInfo from "../user/UserInfo";
     import GouWuChe from "../user/GouWuChe";
-    import store from '../../store/modules/user'
+    //import store from '../../store/modules/user'
 
     export default {
-        store,
+        //store,
         components:{
             Login,
             UserInfo,

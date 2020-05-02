@@ -16,7 +16,7 @@
             </div>
             <div class="intro-content">
                 <div class="box" :style="{left:box_left}" ref="box">
-                    <div class="intro-good" v-for="(item,index) in $store.state.goodslist"
+                    <div class="intro-good" v-for="(item,index) in $store.state.goods.goodslist"
                          :key="index"
                          @click="itemClick(item.product_id)"
                          :class="{'g0':index===0,'g1':index > 0,'g2':index%3===0,'g3':index%3===1,'g4':index%3===2}">
@@ -38,16 +38,16 @@
 </template>
 
 <script>
-    import store from '../../store/modules/goods'
+    //import store from '../../store/modules/goods'
 
     export default {
-        store,
+        //store,
         data(){
             return{
                 box_left: '0',
                 box: 0,
-                goodslist:this.$store.state.goodslist,
-                goodslist_length:this.$store.state.goodslist.length,
+                goodslist:this.$store.state.goods.goodslist,
+                goodslist_length:this.$store.state.goods.goodslist.length,
             }
         },
         methods:{

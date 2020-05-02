@@ -1,12 +1,13 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+// import Vue from 'vue'
+// import Vuex from 'vuex'
 
 import PersistedState from "vuex-persistedstate"
 import axios from 'axios'
 
-Vue.use(Vuex);
+//Vue.use(Vuex);
 
-export default new Vuex.Store({
+//export default new Vuex.Store({
+export default {
     state: {
         userInfo:{
             token:"",
@@ -44,10 +45,6 @@ export default new Vuex.Store({
             })
         }
     },
-
-    modules: {
-
-    },
     plugins: [PersistedState({
         storage: window.localStorage,
         key:"store",
@@ -57,4 +54,4 @@ export default new Vuex.Store({
             }
         }
     })]
-})
+}

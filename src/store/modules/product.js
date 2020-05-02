@@ -1,11 +1,12 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
+// import Vue from 'vue'
+// import Vuex from 'vuex'
+//
 import axios from 'axios'
+//
+// Vue.use(Vuex);
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+//export default new Vuex.Store({
+export default {
     state: {
         product:{
             productInfo:null,
@@ -13,6 +14,7 @@ export default new Vuex.Store({
             proSpec:null,
             proColor:null
         },
+        img_master:''
     },
 
     mutations: {
@@ -22,6 +24,12 @@ export default new Vuex.Store({
             state.product.proImg = data.proImg;
             state.product.proSpec = data.proSpec;
             state.product.proColor = data.proColor;
+
+            for(var i = 0;i<state.product.proImg.length;i++){
+                if(state.product.proImg[i].is_master){
+                    state.img_master = state.product.proImg[i].pic_url;
+                }
+            }
         }
     },
 
@@ -40,9 +48,5 @@ export default new Vuex.Store({
             })
         },
 
-    },
-
-    modules: {
-
     }
-})
+}

@@ -13,7 +13,7 @@
                     <div class="productLeft">
                         <!-- 左侧中图  -->
                         <div class="mdImg">
-                            <img :src="$store.state.img_master" alt="">
+                            <img :src="$store.state.product.img_master" alt="">
                         </div>
                         <!-- 遮罩层  -->
                         <div v-show="isShow"
@@ -39,7 +39,7 @@
                         </div>
 
                         <div v-show="isShow" class="lgImg">
-                            <img :src="$store.state.img_master"
+                            <img :src="$store.state.product.img_master"
                                  alt=""
                                  :style="{top:topLgImg+'px',left:leftLgImg+'px'}"
                             >
@@ -56,9 +56,9 @@
                     <div class="img-lun">
                         <div class="lun-box" :style="{left:box_left,width:width}">
                             <div class="img-box"
-                                 :class="{'first-box':index===0,imgActive:$store.state.product.proImg[index].is_master}"
+                                 :class="{'first-box':index===0,imgActive:$store.state.product.product.proImg[index].is_master}"
                                  @click="imgClick(index)"
-                                 v-for="(item,index) in $store.state.product.proImg">
+                                 v-for="(item,index) in $store.state.product.product.proImg">
                                 <img :src="item.pic_url" alt="">
                             </div>
                         </div>
@@ -80,8 +80,8 @@
             <div class="goods">
                 <ul>
                     <p class="g-name">
-                        {{$store.state.product.productInfo[0].product_name}}
-                        {{$store.state.product.productInfo[0].product_descript}}
+                        {{$store.state.product.product.productInfo[0].product_name}}
+                        {{$store.state.product.product.productInfo[0].product_descript}}
                     </p>
                 </ul>
                 <ul>
@@ -94,7 +94,7 @@
                     <div class="price-title">
                         <p>精选</p>
                     </div>
-                    <div v-for="(item,index) in $store.state.product.proSpec"
+                    <div v-for="(item,index) in $store.state.product.product.proSpec"
                          v-if="item.spec_master">
                         <div class="price" v-if="item.spec_dis_price">
                             <div class="price-1">
@@ -164,7 +164,7 @@
                             <div class="d-s d"
                                  v-show="active[0].show">
                                 <ul>
-                                    <li v-for="(item,index) in $store.state.address_sheng"
+                                    <li v-for="(item,index) in $store.state.address.address_sheng"
                                         :key="index"
                                         @click="shengClick(index)">
                                         {{item.name}}
@@ -174,7 +174,7 @@
 
                             <div class="d-c d" v-show="active[1].show">
                                 <ul>
-                                    <li v-for="(item,index) in $store.state.address_city"
+                                    <li v-for="(item,index) in $store.state.address.address_city"
                                         :key="index"
                                         @click="cityClick(index)">
                                         {{item.name}}
@@ -184,7 +184,7 @@
 
                             <div class="d-x d" v-show="active[2].show">
                                 <ul>
-                                    <li v-for="(item,index) in $store.state.address_xian"
+                                    <li v-for="(item,index) in $store.state.address.address_xian"
                                         :key="index"
                                         @click="xianClick(index)">
                                         {{item.name}}
@@ -193,8 +193,8 @@
                             </div>
 
                             <div class="d-z d" v-show="active[3].show">
-                                <ul v-if="this.$store.state.address_zhen.length">
-                                    <li v-for="(item,index) in $store.state.address_zhen"
+                                <ul v-if="this.$store.state.address.address_zhen.length">
+                                    <li v-for="(item,index) in $store.state.address.address_zhen"
                                         :key="index"
                                         @click="zhenClick(index)">
                                         {{item.name}}
@@ -226,9 +226,9 @@
                         <p>选择颜色</p>
                         <div>
                             <div class="box-color"
-                                 :class="{colorActive:$store.state.product.proColor[index].color_master}"
+                                 :class="{colorActive:$store.state.product.product.proColor[index].color_master}"
                                  @click="colorClick(index)"
-                                 v-for="(item,index) in $store.state.product.proColor">
+                                 v-for="(item,index) in $store.state.product.product.proColor">
 
                                 <img src="../../assets/img/intro01.jpg">
                                 <p>{{item.color_name}}</p>
@@ -240,9 +240,9 @@
                         <p>选择版本</p>
                         <div class="box-kinds">
                             <p class="p-kinds"
-                               :class="{kindsActive:$store.state.product.proSpec[index].spec_master}"
+                               :class="{kindsActive:$store.state.product.product.proSpec[index].spec_master}"
                                @click="kindsClick(index)"
-                               v-for="(item,index) in $store.state.product.proSpec">
+                               v-for="(item,index) in $store.state.product.product.proSpec">
                                 {{item.spec_name}}
                             </p>
                         </div>
@@ -264,7 +264,7 @@
 
                     <div class="d-btn">
                         <button class="btn-buy">立即购买</button>
-                        <button class="btn-add">加入购物车</button>
+                        <button class="btn-add" @click="addOrder">加入购物车</button>
                         <div class="link-c">
                             <i class="el-icon-star-off"></i>
                             <p>收藏</p>
@@ -278,9 +278,11 @@
 </template>
 
 <script>
-    import store from '../../store/modules/address'
+    //import store from '../../store/modules/address'
+    //import store1 from '../../store/modules/user'
     export default {
-        store,
+        //store,
+        //store1,
         data(){
             return{
                 //商品id
@@ -310,12 +312,22 @@
                 //商品信息
                 product:{
                     productInfo:[],
-                    proImg:this.$store.state.product.proImg,
+                    proImg:this.$store.state.product.product.proImg,
                     proSpec:[],
                     proColor:[]
                 },
-                img_Count:this.$store.state.product.proImg.length,
-                specShow:[{selected:false},]
+                img_Count:this.$store.state.address.product.proImg.length,
+                order:{
+                    orderId:null,
+                    orderName:'',
+                    username:'',
+                    orderUrl:this.$store.state.product.product.proImg[0].pic_url,
+                    orderPrice:this.$store.state.product.product.proSpec[0].spec_price,
+                    orderCount:1,
+                    orderSpec:this.$store.state.product.product.proSpec[0].spec_name,
+                    orderColor:this.$store.state.product.product.proColor[0].color_name,
+                    orderAddress:''
+                }
             }
         },
         methods:{
@@ -331,6 +343,7 @@
             moveOut:function () {
                 this.boxShow = false;
             },
+
             handleChange:function(index) {
                 if(index === 0) {
                     if(!this.active[0].show){
@@ -363,8 +376,8 @@
                 }
             },
             shengClick:function (index) {
-                this.address_item[0].name = this.$store.state.address_sheng[index].name;
-                let id = this.$store.state.address_sheng[index].id;
+                this.address_item[0].name = this.$store.state.address.address_sheng[index].name;
+                let id = this.$store.state.address.address_sheng[index].id;
 
                 this.$store.dispatch('getCity',{upid:id}).then(res => {
                     this.address_item[1].name = "--请选择--";
@@ -373,8 +386,8 @@
                 });
             },
             cityClick:function (index) {
-                this.address_item[1].name = this.$store.state.address_city[index].name;
-                let id = this.$store.state.address_city[index].id;
+                this.address_item[1].name = this.$store.state.address.address_city[index].name;
+                let id = this.$store.state.address.address_city[index].id;
 
                 this.$store.dispatch('getXian',{upid:id}).then(res => {
                     this.p_show[0].show = true;
@@ -382,8 +395,8 @@
                 });
             },
             xianClick:function (index) {
-                this.address_item[2].name = this.$store.state.address_xian[index].name;
-                let id = this.$store.state.address_xian[index].id;
+                this.address_item[2].name = this.$store.state.address.address_xian[index].name;
+                let id = this.$store.state.address.address_xian[index].id;
 
                 this.$store.dispatch('getZhen',{upid:id}).then(res => {
                     //console.log(this.$store.state.address_zhen)
@@ -393,11 +406,12 @@
                 });
             },
             zhenClick:function (index) {
-                this.address_item[3].name = this.$store.state.address_zhen[index].name;
+                this.address_item[3].name = this.$store.state.address.address_zhen[index].name;
                 this.address = this.address_item[0].name + this.address_item[1].name +
                                 this.address_item[2].name + this.address_item[3].name;
                 this.boxShow = false;
             },
+
             select:function () {
                 this.$store.dispatch('getSheng',{level:1}).then(res => {
                     this.address_item[0].name = "江苏";
@@ -424,6 +438,7 @@
                 this.$store.dispatch('getProduct',{product_id:this.product_id}).then(res =>{
 
                 });
+                //console.log(this.$store.state.product.proImg);
             },
 
             //鼠标进入和离开
@@ -477,31 +492,60 @@
 
             //点击事件
             imgClick:function (index) {
-                this.$store.state.img_master = this.$store.state.product.proImg[index].pic_url;
+                this.$store.state.product.img_master = this.$store.state.product.product.proImg[index].pic_url;
 
-                var imgList = this.$store.state.product.proImg;
+                var imgList = this.$store.state.product.product.proImg;
                 for(var i=0;i<imgList.length;i++){
-                    this.$store.state.product.proImg[i].is_master = 0;
+                    this.$store.stat.producte.product.proImg[i].is_master = 0;
                 }
 
-                this.$store.state.product.proImg[index].is_master = 1;
+                this.$store.state.product.product.proImg[index].is_master = 1;
+                this.order.orderUrl = this.$store.state.product.product.proImg[index].pic_url;
 
             },
             kindsClick:function (index) {
-                var specList = this.$store.state.product.proSpec;
+                var specList = this.$store.state.product.product.proSpec;
                 for(var i=0;i<specList.length;i++){
-                    this.$store.state.product.proSpec[i].spec_master = 0;
+                    this.$store.state.product.product.proSpec[i].spec_master = 0;
                 }
 
-                this.$store.state.product.proSpec[index].spec_master = 1;
+                this.$store.state.product.product.proSpec[index].spec_master = 1;
+                this.order.orderSpec = this.$store.state.product.product.proSpec[index].spec_name;
+                this.order.orderPrice = this.$store.state.product.product.proSpec[index].spec_price;
             },
             colorClick:function (index) {
-                var colorList = this.$store.state.product.proColor;
+                var colorList = this.$store.state.product.product.proColor;
                 for(var i=0;i<colorList.length;i++){
-                    this.$store.state.product.proColor[i].color_master = 0;
+                    this.$store.state.product.product.proColor[i].color_master = 0;
                 }
 
-                this.$store.state.product.proColor[index].color_master = 1;
+                this.$store.state.product.product.proColor[index].color_master = 1;
+                this.order.orderColor = this.$store.state.product.product.proColor[index].color_name;
+            },
+            addOrder:function () {
+                this.order.orderId = this.$route.params.id;
+                this.order.orderName = this.$store.state.product.product.productInfo[0].product_name;
+                this.order.orderCount = this.num;
+                this.order.orderAddress = this.address;
+                this.order.username = this.$store.state.user.userInfo.user.username;
+                //console.log(this.$store1.state.userInfo.user);
+                if(!this.order.orderUrl){
+                    this.setOrder();
+                }
+
+                if(this.order.orderAddress === '--请选择--'){
+                    alert("地址不能为空");
+                }else{
+                    this.$store.dispatch('addOrder',this.order).then(res => {
+                        this.$message.success("成功加入购物车");
+                    });
+                }
+            },
+            setOrder:function () {
+                this.order.orderUrl = this.$store.state.product.product.proImg[0].pic_url;
+                this.order.orderPrice = this.$store.state.product.product.proSpec[0].spec_price;
+                this.order.orderSpec = this.$store.state.product.product.proSpec[0].spec_name;
+                this.order.orderColor = this.$store.state.product.product.proColor[0].color_name;
             }
         },
         mounted() {

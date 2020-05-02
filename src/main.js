@@ -10,6 +10,12 @@ Vue.config.productionTip = false;
 Vue.use(element);
 Vue.prototype.$axios = axios;
 
+import Router from 'vue-router'
+const routerPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+};
+
 //axios拦截器设置请求头Authorization
 axios.interceptors.request.use(config => {
   //console.log(config);

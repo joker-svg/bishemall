@@ -50,10 +50,10 @@
 </template>
 
 <script>
-    import store from '../../store/modules/user'
+    //import store from '../../store/modules/user'
 
     export default {
-        store,
+        //store,
         data(){
             var validatePass = (rule, value, callback) => {
                 if (value === '') {

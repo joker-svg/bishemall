@@ -36,6 +36,9 @@ var sqlMap = {
         //查询商品规格
         selectProductSpec:'select * from product_spec where product_id = ?'
 
+    },
+    order:{
+        insertOrder:'INSERT INTO `order`(product_id,username,order_name,order_url,order_price,order_count,order_spec,order_color,order_address) values (?,?,?,?,?,?,?,?,?)'
     }
 };
 
