@@ -7,6 +7,7 @@ import address from './modules/address'
 import product from './modules/product'
 import goods from "./modules/goods";
 import orderCart from "./modules/orderCart";
+import payCart from "./modules/payCart";
 
 Vue.use(Vuex);
 const vuexPersisted= new createPersistedState({
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     address,
     product,
     goods,
-    orderCart
+    orderCart,
+    payCart
   }
 })

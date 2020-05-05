@@ -24,7 +24,7 @@ export default {
             state.userInfo = {
                 token:"",
                 user:{}
-            }
+            };
         }
     },
 
@@ -50,7 +50,7 @@ export default {
         key:"store",
         reducer(val) {
             return {
-                userInfo:val.userInfo
+                userInfo:val.user
             }
         }
     })]

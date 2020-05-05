@@ -42,11 +42,11 @@
                         <span></span>
                     </li>
 
-                    <li class="gouWuChe">
+                    <li class="gouWuChe" @click="toOrder">
                         <a class="gouwu">
                             <i class="el-icon-shopping-cart-2" style="width: 20px;height: 20px;font-weight: bold"></i>
                             购物车
-                            <span class="gouwu">(0)</span>
+                            <span class="gouwu">({{$store.state.orderCart.listCart.length}})</span>
                         </a>
                     </li>
                 </ul>
@@ -78,10 +78,14 @@
                 if(command === 'exit'){
                     //清除本地数据
                     this.$store.commit('clearUserInfo');
+                    this.$store.commit('clearList');
                     this.$message.success("退出成功！");
                 }else if(command === 'myInfo'){
 
                 }
+            },
+            toOrder:function () {
+                this.$router.push({path:'/order'})
             }
         }
     }

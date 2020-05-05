@@ -38,7 +38,18 @@ var sqlMap = {
 
     },
     order:{
-        insertOrder:'INSERT INTO `order`(product_id,username,order_name,order_url,order_price,order_count,order_spec,order_color,order_address) values (?,?,?,?,?,?,?,?,?)'
+        insertOrder:'INSERT INTO `order`(product_id,username,order_name,order_descript,order_url,order_price,order_count,order_spec,order_color,order_address) values (?,?,?,?,?,?,?,?,?,?)',
+
+        //查询购物车商品
+        selectCart:'SELECT * from `order` where username = ?' ,
+
+        //删除购物车商品
+        deleteCart:'delete from `order` where order_id = ?',
+        //删除购物车全部商品
+        deleteAllCart:'delete from `order`',
+    },
+    orderCart:{
+        insertCart:'INSERT INTO `orderCart`(product_id, username, orderCart_name, orderCart_descript, orderCart_url, orderCart_price, orderCart_count, orderCart_spec, orderCart_color, orderCart_address) VALUES ?'
     }
 };
 

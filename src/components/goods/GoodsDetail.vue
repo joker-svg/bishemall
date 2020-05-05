@@ -13,7 +13,7 @@
                     <div class="productLeft">
                         <!-- 左侧中图  -->
                         <div class="mdImg">
-                            <img :src="$store.state.product.img_master" alt="">
+                            <img :src="img_master" alt="">
                         </div>
                         <!-- 遮罩层  -->
                         <div v-show="isShow"
@@ -39,7 +39,7 @@
                         </div>
 
                         <div v-show="isShow" class="lgImg">
-                            <img :src="$store.state.product.img_master"
+                            <img :src="img_master"
                                  alt=""
                                  :style="{top:topLgImg+'px',left:leftLgImg+'px'}"
                             >
@@ -56,9 +56,9 @@
                     <div class="img-lun">
                         <div class="lun-box" :style="{left:box_left,width:width}">
                             <div class="img-box"
-                                 :class="{'first-box':index===0,imgActive:$store.state.product.product.proImg[index].is_master}"
+                                 :class="{'first-box':index===0,imgActive:product.proImg[index].is_master}"
                                  @click="imgClick(index)"
-                                 v-for="(item,index) in $store.state.product.product.proImg">
+                                 v-for="(item,index) in product.proImg">
                                 <img :src="item.pic_url" alt="">
                             </div>
                         </div>
@@ -80,8 +80,8 @@
             <div class="goods">
                 <ul>
                     <p class="g-name">
-                        {{$store.state.product.product.productInfo[0].product_name}}
-                        {{$store.state.product.product.productInfo[0].product_descript}}
+                        {{product.productInfo[0].product_name}}
+                        {{product.productInfo[0].product_descript}}
                     </p>
                 </ul>
                 <ul>
@@ -94,7 +94,7 @@
                     <div class="price-title">
                         <p>精选</p>
                     </div>
-                    <div v-for="(item,index) in $store.state.product.product.proSpec"
+                    <div v-for="(item,index) in product.proSpec"
                          v-if="item.spec_master">
                         <div class="price" v-if="item.spec_dis_price">
                             <div class="price-1">
@@ -226,9 +226,9 @@
                         <p>选择颜色</p>
                         <div>
                             <div class="box-color"
-                                 :class="{colorActive:$store.state.product.product.proColor[index].color_master}"
+                                 :class="{colorActive:product.proColor[index].color_master}"
                                  @click="colorClick(index)"
-                                 v-for="(item,index) in $store.state.product.product.proColor">
+                                 v-for="(item,index) in product.proColor">
 
                                 <img src="../../assets/img/intro01.jpg">
                                 <p>{{item.color_name}}</p>
@@ -240,9 +240,9 @@
                         <p>选择版本</p>
                         <div class="box-kinds">
                             <p class="p-kinds"
-                               :class="{kindsActive:$store.state.product.product.proSpec[index].spec_master}"
+                               :class="{kindsActive:product.proSpec[index].spec_master}"
                                @click="kindsClick(index)"
-                               v-for="(item,index) in $store.state.product.product.proSpec">
+                               v-for="(item,index) in product.proSpec">
                                 {{item.spec_name}}
                             </p>
                         </div>
@@ -278,11 +278,8 @@
 </template>
 
 <script>
-    //import store from '../../store/modules/address'
-    //import store1 from '../../store/modules/user'
+
     export default {
-        //store,
-        //store1,
         data(){
             return{
                 //商品id
@@ -311,21 +308,23 @@
                 width:'624px',
                 //商品信息
                 product:{
-                    productInfo:[],
-                    proImg:this.$store.state.product.product.proImg,
+                    productInfo:[{}],
+                    proImg:[],
                     proSpec:[],
                     proColor:[]
                 },
-                img_Count:this.$store.state.address.product.proImg.length,
+                img_master:'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ccd09671448c4cdb4a3817f68f788662.jpg?thumb=1&w=250&h=250&f=webp&q=90',
+                img_Count:5,//this.product.proImg.length,
                 order:{
                     orderId:null,
                     orderName:'',
+                    orderDescript:'',
                     username:'',
-                    orderUrl:this.$store.state.product.product.proImg[0].pic_url,
-                    orderPrice:this.$store.state.product.product.proSpec[0].spec_price,
+                    orderUrl:null,
+                    orderPrice:null,
                     orderCount:1,
-                    orderSpec:this.$store.state.product.product.proSpec[0].spec_name,
-                    orderColor:this.$store.state.product.product.proColor[0].color_name,
+                    orderSpec:null,//this.product.proSpec[0].spec_name,
+                    orderColor:null,//this.product.proColor[0].color_name,
                     orderAddress:''
                 }
             }
@@ -435,10 +434,29 @@
 
             //获取商品
             getProduct:function(){
-                this.$store.dispatch('getProduct',{product_id:this.product_id}).then(res =>{
 
-                });
-                //console.log(this.$store.state.product.proImg);
+                //调用接口
+                this.$axios({
+                    url:"/api/goods/selectProduct",
+                    method:"POST",
+                    data: {
+                        product_id:this.product_id
+                    }
+                }).then(res => {
+                    //commit('setProduct',res.data);
+                    this.product.productInfo = res.data.productInfo;
+                    this.product.proImg = res.data.proImg;
+                    this.product.proSpec = res.data.proSpec;
+                    this.product.proColor = res.data.proColor;
+                    this.img_Count = this.product.proImg.length;
+
+                    this.product.proImg.forEach((item,index) => {
+                        if(this.product.proImg[index].is_master){
+                            this.img_master = this.product.proImg[index].pic_url;
+                        }
+                    });
+
+                })
             },
 
             //鼠标进入和离开
@@ -492,61 +510,68 @@
 
             //点击事件
             imgClick:function (index) {
-                this.$store.state.product.img_master = this.$store.state.product.product.proImg[index].pic_url;
+                this.img_master = this.product.proImg[index].pic_url;
 
-                var imgList = this.$store.state.product.product.proImg;
+                var imgList = this.product.proImg;
                 for(var i=0;i<imgList.length;i++){
-                    this.$store.stat.producte.product.proImg[i].is_master = 0;
+                    this.product.proImg[i].is_master = 0;
                 }
 
-                this.$store.state.product.product.proImg[index].is_master = 1;
-                this.order.orderUrl = this.$store.state.product.product.proImg[index].pic_url;
+                this.product.proImg[index].is_master = 1;
+                this.order.orderUrl = this.product.proImg[index].pic_url;
 
             },
             kindsClick:function (index) {
-                var specList = this.$store.state.product.product.proSpec;
+                var specList = this.product.proSpec;
                 for(var i=0;i<specList.length;i++){
-                    this.$store.state.product.product.proSpec[i].spec_master = 0;
+                    this.product.proSpec[i].spec_master = 0;
                 }
 
-                this.$store.state.product.product.proSpec[index].spec_master = 1;
-                this.order.orderSpec = this.$store.state.product.product.proSpec[index].spec_name;
-                this.order.orderPrice = this.$store.state.product.product.proSpec[index].spec_price;
+                this.product.proSpec[index].spec_master = 1;
+                this.order.orderSpec = this.product.proSpec[index].spec_name;
+                this.order.orderPrice = this.product.proSpec[index].spec_price;
             },
             colorClick:function (index) {
-                var colorList = this.$store.state.product.product.proColor;
+                var colorList = this.product.proColor;
                 for(var i=0;i<colorList.length;i++){
-                    this.$store.state.product.product.proColor[i].color_master = 0;
+                    this.product.proColor[i].color_master = 0;
                 }
 
-                this.$store.state.product.product.proColor[index].color_master = 1;
-                this.order.orderColor = this.$store.state.product.product.proColor[index].color_name;
+                this.product.proColor[index].color_master = 1;
+                this.order.orderColor = this.product.proColor[index].color_name;
             },
             addOrder:function () {
-                this.order.orderId = this.$route.params.id;
-                this.order.orderName = this.$store.state.product.product.productInfo[0].product_name;
-                this.order.orderCount = this.num;
-                this.order.orderAddress = this.address;
-                this.order.username = this.$store.state.user.userInfo.user.username;
-                //console.log(this.$store1.state.userInfo.user);
-                if(!this.order.orderUrl){
-                    this.setOrder();
-                }
+                if(this.$store.state.user.userInfo.token){
+                    this.order.orderId = this.$route.params.id;
+                    this.order.orderName = this.product.productInfo[0].product_name;
+                    this.order.orderDescript = this.product.productInfo[0].product_descript;
+                    this.order.orderCount = this.num;
+                    this.order.orderAddress = this.address;
+                    this.order.username = this.$store.state.user.userInfo.user.username;
+                    //console.log(this.$store1.state.userInfo.user);
+                    if(!this.order.orderUrl){
+                        this.setOrder();
+                    }
 
-                if(this.order.orderAddress === '--请选择--'){
-                    alert("地址不能为空");
+                    if(this.order.orderAddress === '--请选择--'){
+                        alert("地址不能为空");
+                    }else{
+                        this.$store.dispatch('addOrder',this.order).then(res => {
+                            this.$message.success("成功加入购物车");
+                            this.$router.push({path:'/'});
+                        });
+                    }
                 }else{
-                    this.$store.dispatch('addOrder',this.order).then(res => {
-                        this.$message.success("成功加入购物车");
-                    });
+                    this.$message.error("请先登录");
+                    this.$router.push({path:'/login'});
                 }
             },
             setOrder:function () {
-                this.order.orderUrl = this.$store.state.product.product.proImg[0].pic_url;
-                this.order.orderPrice = this.$store.state.product.product.proSpec[0].spec_price;
-                this.order.orderSpec = this.$store.state.product.product.proSpec[0].spec_name;
-                this.order.orderColor = this.$store.state.product.product.proColor[0].color_name;
-            }
+                this.order.orderUrl = this.product.proImg[0].pic_url;
+                this.order.orderPrice = this.product.proSpec[0].spec_price;
+                this.order.orderSpec = this.product.proSpec[0].spec_name;
+                this.order.orderColor = this.product.proColor[0].color_name;
+            },
         },
         mounted() {
             this.select();
@@ -563,6 +588,7 @@
         created() {
             //获取商品 id
             this.product_id = this.$route.params.id;
+            this.getProduct();
 
         },
         computed:{

@@ -93,9 +93,12 @@
                         //调用登录接口
                         this.$store.dispatch('login',this.ruleForm).then(res => {
                             this.$message.success("登录成功！");
+                            this.getCart();
                             this.$router.push({path:'/'});
                             //this.$router.replace({path:'/'});
                         });
+
+                        //
 
                     } else {
                         console.log('error submit!!');
@@ -103,6 +106,14 @@
                     }
 
                 });
+            },
+            getCart(){
+                var that = this;
+                setTimeout(function () {
+                    let username = that.$store.state.user.userInfo.user.username;
+                    that.$store.dispatch('selectCart',{username:username});
+                },500);
+
             },
             //获取随机数
             h_random:function () {
