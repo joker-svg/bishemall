@@ -408,8 +408,8 @@
                 this.boxShow = false;
             },
             btnPay:function () {
-                let orderCartList = [];
-                let arr = {
+                let orderCartList1 = [];
+                let arr = [{
                     product_id:0,
                     username:'',
                     order_name:'',
@@ -419,28 +419,35 @@
                     order_count:0,
                     order_spec:'',
                     order_color:'',
-                    order_address:''
-                };
+                    order_address:'',
+                }];
                 let orderList = this.$store.state.orderCart.listCart;
+                let count = 0;
                 orderList.forEach((item,index) => {
                     if(item.order_select){
-                        arr.product_id = item.product_id;
-                        arr.username = item.username;
-                        arr.order_name = item.order_name;
-                        arr.order_descript = item.order_descript;
-                        arr.order_url = item.order_url;
-                        arr.order_price = item.order_price;
-                        arr.order_count = item.order_count;
-                        arr.order_spec = item.order_spec;
-                        arr.order_color = item.order_color;
-                        arr.order_address  = item.order_address;
-                        orderCartList.push(arr);
+                        count++;
+                        arr[0].product_id = item.product_id;
+                        arr[0].username = item.username;
+                        arr[0].order_name = item.order_name;
+                        arr[0].order_descript = item.order_descript;
+                        arr[0].order_url = item.order_url;
+                        arr[0].order_price = item.order_price;
+                        arr[0].order_count = item.order_count;
+                        arr[0].order_spec = item.order_spec;
+                        arr[0].order_color = item.order_color;
+                        arr[0].order_address  = item.order_address;
+                        orderCartList1.push(item);
                     }
                 });
                 //console.log(orderCartList);
-                this.$store.dispatch('addPayCart',orderCartList).then(res => {
-                    this.$message.success("生成订单成功！");
-                });
+                if(count > 0){
+                    this.$store.dispatch('saveCart',orderCartList1).then(res => {
+                        this.$message.success("保存订单成功！");
+                        this.$router.push({path:'newOrderCart'});
+                    });
+                }else{
+                    this.$message.error("请先选择商品！");
+                }
             },
 
             //
@@ -451,6 +458,7 @@
                     this.isFixed = false;
                 }
                 //console.log('距离顶部高度',this.$refs.orderFlag.getBoundingClientRect().top)
+
             }
         },
         computed:{
@@ -482,11 +490,12 @@
         },
         mounted() {
             //console.log(this.$store.state.orderCart.listCart[0].order_select);
-            window.addEventListener('scroll', this.handelScroll);
+            window.addEventListener('scroll', this.handelScroll,true);
         },
         //回调中移除监听
         destroyed() {
-            window.removeEventListener('scroll', this.handleScroll)
+            window.removeEventListener('scroll', this.handelScroll,false);
+            console.log("移除");
         }
     }
 </script>

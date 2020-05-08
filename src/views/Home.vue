@@ -55,7 +55,10 @@ export default {
     Goods,
     Lunbo_com,
     Login
-  }
+  },
+    created() {
+        this.$store.commit('clearCart');
+    }
 }
 </script>
 

@@ -37,6 +37,27 @@ const routes = [
     path:'/order',
     name:'Order',
     component:() => import(/*webpackChunkName: "detail"*/'../views/Order')
+  },
+  {
+    path:'/newOrderCart',
+    name:'/newOrderCart',
+    component:() => import(/*webpackChunkName: "detail"*/'../views/Cart')
+  },
+  {
+    path:'/pay/:money',
+    name:'/pay',
+    component:() => import(/*webpackChunkName: "detail"*/'../views/Pay')
+  },
+  {
+    path:'/myCenter',
+    name:'/myCenter',
+    component:() => import('../views/MyCenter'),
+    redirect:'/myCart',
+    children:[
+      {path:'/myCart',component:() => import ('../components/my/myCart')},
+      {path: '/own',component:() => import('../components/my/Own')},
+      {path:'/myAddress',components:() => import('../components/my/Address')}
+    ]
   }
 ];
 

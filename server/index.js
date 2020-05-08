@@ -11,6 +11,7 @@ const addressApi = require('./api/addressApi');
 const goodsApi = require('./api/goodsApi');
 const orderApi = require('./api/orderApi');
 const payCartApi = require('./api/payCartApi');
+const userInfoApi = require('./api/userInfoApi');
 
 let app = express();
 let server = http.createServer(app);
@@ -29,13 +30,26 @@ app.use(expressJwt({
             "/api/user/addUser",
             "/api/address/selectAddress",
             "/api/address/Address",
+
             "/api/goods/selectProduct",
             "/api/goods/selectDiscountGoods",
+
             "/api/order/selectCart",
             "/api/order/deleteCart",
             "/api/order/deleteAllCart",
             "/api/order/insertOrder",
-            "/api/pay/insertOrder"]
+
+            "/api/pay/updateOrderCart",
+            "/api/pay/selectOrderCart",
+            "/api/pay/selectPayCart",
+            "/api/pay/selectDelivery",
+            "/api/pay/selectReceive",
+            "/api/pay/deleteCart",
+            "/api/pay/insertOrderCart",
+
+            "/api/userInfo/insertUserInfo",
+            "/api/userInfo/updateUserInfo",
+            "/api/userInfo/selectUserInfo"]
 }));
 
 // 未携带token请求接口会出错，触发这个
@@ -51,6 +65,7 @@ app.use('/api/address', addressApi);
 app.use('/api/goods', goodsApi);
 app.use('/api/order', orderApi);
 app.use('/api/pay',payCartApi);
+app.use('/api/userInfo',userInfoApi);
 
 // 启动监听
 server.listen(8888, () => {

@@ -10,7 +10,8 @@ class DBHelper{
             port:'3306',
             user:'root',
             password:'123456',
-            database:'bishe'  // 数据库名
+            database:'bishe',  // 数据库名,
+            multipleStatements: true
         });
         conn.connect();
         return conn;

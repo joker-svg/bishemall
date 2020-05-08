@@ -49,8 +49,19 @@ var sqlMap = {
         deleteAllCart:'delete from `order`',
     },
     orderCart:{
-        insertCart:'INSERT INTO `orderCart`(product_id, username, orderCart_name, orderCart_descript, orderCart_url, orderCart_price, orderCart_count, orderCart_spec, orderCart_color, orderCart_address) VALUES ?'
-    }
+        insertCart:'INSERT INTO `orderCart`(product_id, username, orderCart_name, orderCart_descript, orderCart_url, orderCart_price, orderCart_count, orderCart_spec, orderCart_color, orderCart_address) VALUES ?',
+        updatePayCart:'update `orderCart` set orderCart_pay = ? where orderCart_id = ?',
+        selectCart:'select * from `orderCart`',
+        selectPay:'select * from `orderCart` where orderCart_pay = 0',
+        selectDelivery:'select * from `orderCart` where orderCart_pay = 1 and orderCart_delivery = 0',
+        selectReceive:'select * from `orderCart` where orderCart_pay = 1 and orderCart_delivery = 1 and orderCart_receive = 0',
+        deleteCart:'delete from `orderCArt` where orderCart_id = ?'
+    },
+    userInfo:{
+        addUserInfo:'insert into `userInfo`(name,username,sex,birthday,nation,constellation,record,trade,address) values (?,?,?,?,?,?,?,?,?)',
+        updateUserInfo:'update `userInfo` set name = ?,sex = ?,birthday = ?,nation = ?,constellation = ?,record = ?,trade = ?,address = ? where username = ?',
+        selectInfo:'select * from `userInfo` where username = ?',
+    },
 };
 
 module.exports = sqlMap;
