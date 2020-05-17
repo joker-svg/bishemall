@@ -34,7 +34,7 @@
             </el-form-item>
 
             <router-link
-                to="/"
+                to="/resetPass"
                 class="link-forget">
                 忘记密码？
             </router-link>
@@ -97,8 +97,6 @@
                             this.$router.push({path:'/'});
                             //this.$router.replace({path:'/'});
                         });
-
-                        //
 
                     } else {
                         console.log('error submit!!');

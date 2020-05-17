@@ -59,7 +59,11 @@ export default {
                 method:"POST",
                 data: data
             }).then(res => {
-                //console.log(res.data);
+                // if(res.data.status === 200){
+                //     commit('setlistCart',res.data);
+                // }else{
+                //     alert('查询失败');
+                // }
                 commit('setlistCart',res.data);
             })
         },

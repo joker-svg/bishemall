@@ -74,8 +74,8 @@
                                     <el-menu-item-group>
                                         <el-menu-item index="/own">个人资料</el-menu-item>
                                         <el-menu-item index="/myAddress">收货地址</el-menu-item>
-                                        <el-menu-item index="4-3">会员权益</el-menu-item>
-                                        <el-menu-item index="4-4">安全中心</el-menu-item>
+                                        <el-menu-item index="/for">会员权益</el-menu-item>
+                                        <el-menu-item index="/forget">安全中心</el-menu-item>
                                         <el-menu-item index="4-5">发票信息</el-menu-item>
                                     </el-menu-item-group>
                                 </el-submenu>

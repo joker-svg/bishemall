@@ -55,9 +55,20 @@ const routes = [
     redirect:'/myCart',
     children:[
       {path:'/myCart',component:() => import ('../components/my/myCart')},
+      {path: '/forget',component:() => import('../components/my/Forget')},
       {path: '/own',component:() => import('../components/my/Own')},
-      {path:'/myAddress',components:() => import('../components/my/Address')}
+      {path:'/myAddress',components:() => import('../components/my/Address')},
     ]
+  },
+  {
+    path:'/products/:name',
+    name:'/products',
+    component:() => import(/*webpackChunkName: "detail"*/'../components/goods/Products')
+  },
+  {
+    path:'/resetPass',
+    name:'/resetPass',
+    component:() => import(/*webpackChunkName: "detail"*/'../views/resetPass')
   }
 ];
 

@@ -80,8 +80,9 @@
                     this.$store.commit('clearUserInfo');
                     this.$store.commit('clearList');
                     this.$message.success("退出成功！");
+                    this.$router.push('/');
                 }else if(command === 'myInfo'){
-
+                    this.$router.push('/myCenter');
                 }
             },
             toOrder:function () {

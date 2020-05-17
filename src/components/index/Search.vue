@@ -13,8 +13,8 @@
                 </ul>
             </div>
             <div class="search">
-                <input class="content" v-model="inputin" placeholder="请输入内容" type="search">
-                <input type="submit" class="btnSearch" value="">
+                <input class="content" v-model="inputIn" placeholder="请输入内容" type="search">
+                <input type="submit" class="btnSearch" value="" @click="searchProduct">
             </div>
 
             <div v-for="(item ,index) in 6">
@@ -37,7 +37,7 @@
     export default {
         data(){
             return{
-                inputin:'',
+                inputIn:'',
                 imgSrc:require("../../assets/img/log.png"),
                 menu:["手机","电视","笔记本","家电","路由器","智能硬件"],
                 isTrue:[{hide:false},{hide:false},{hide:false},{hide:false},{hide:false},{hide:false}],
@@ -67,6 +67,17 @@
             boxhide:function (index) {
                 this.isTrue[index].hide=!this.isTrue[index].hide;
                 this.show2=!this.show2;
+            },
+            searchProduct:function () {
+                if(this.inputIn === '手机'){
+                    this.$router.push('/products/'+"phone");
+                }else if(this.inputIn === '电脑'){
+                    this.$router.push('/products/'+"computer");
+                }else if(this.inputIn === '优惠'){
+                    this.$router.push('/products/'+"discount");
+                }else{
+                    this.$router.push('/products/'+"0");
+                }
             }
         },
         mounted() {
@@ -145,6 +156,7 @@
         .content{
             height: 50px;
             width: 310px;
+            padding-left: 10px;
         }
         .content:focus{
             //border-color: @theme-color;
@@ -168,7 +180,7 @@
     }
 
     .transition-box {
-        width: 100%;
+        width: 90%;
         height: 220px;
         background-color: white;
         position: absolute;

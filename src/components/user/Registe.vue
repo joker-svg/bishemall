@@ -188,12 +188,21 @@
                             method:"POST",
                             data:this.ruleForm
                         }).then(res => {
+                            // if(res.data.status===200){
+                            //     alert("注册成功");
+                            //     console.log(res);
+                            //     this.$router.push({path:'/login'});
+                            // }else{
+                            //     this.$message.error("注册失败！");
+                            //     return false;
+                            // }
                             alert("注册成功");
                             console.log(res);
                             this.$router.push({path:'/login'});
+
                         })
                     } else {
-                        console.log('error submit!!');
+                        console.log('格式输入有误!!');
                         return false;
                     }
 

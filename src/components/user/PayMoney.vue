@@ -47,9 +47,7 @@
                 this.$prompt('请输入密码', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消'
-
                 }).then(({ value }) => {
-
                     if(value === '123456'){
                         this.$message({
                             type: 'success',
@@ -64,7 +62,6 @@
                             arr[i][0] = 1;
                             arr[i][1] = startId+i;
                         }
-                        //console.log(arr);
                         this.$store.dispatch('updatePayCart',arr);
                         this.$router.push('/');
                     }else{

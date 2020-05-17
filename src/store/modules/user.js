@@ -37,6 +37,13 @@ export default {
                 method:"POST",
                 data: data
             }).then(res => {
+                // if(res.data.status === 200){
+                //     //调用store的方法，把用户数据传过去
+                //     commit('setUserInfo',res.data);
+                //
+                //     //调用外部的成功的一个回调函数
+                //     Promise.resolve();
+                // }
                 //调用store的方法，把用户数据传过去
                 commit('setUserInfo',res.data);
 
